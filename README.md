@@ -37,3 +37,4 @@ coding!
 | Name | Role | GitHub | LinkedIn |
 | ----------- | ----------- | ----------- |----------- |
 | Jorge Alvarado | Developer | [Alvarado08](https://github.com/Alvarado08) | [in/jorgep-alvarado](https://www.linkedin.com/in/jorgep-alvarado) |
+| Olga Yudkin | Developer | [cvtqx](https://github.com/cvtqx) | [in/olga-yudkin](https://www.linkedin.com/in/olga-yudkin/) |
