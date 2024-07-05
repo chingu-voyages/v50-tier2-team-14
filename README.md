@@ -39,3 +39,4 @@ coding!
 | Jorge Alvarado | Developer | [Alvarado08](https://github.com/Alvarado08) | [in/jorgep-alvarado](https://www.linkedin.com/in/jorgep-alvarado) |
 | Olga Yudkin | Developer | [cvtqx](https://github.com/cvtqx) | [in/olga-yudkin](https://www.linkedin.com/in/olga-yudkin/) |
 | Andrew Arias | Developer | [andresmao85](https://github.com/andresmao85) | [in/andres-ao](https://www.linkedin.com/in/andres-ao/) |
+| Natalie Chan | Developer | [Natkuma01](https://github.com/Natkuma01) | [in/natalie-chan-shimin](https://www.linkedin.com/in/natalie-chan-shimin/) |
