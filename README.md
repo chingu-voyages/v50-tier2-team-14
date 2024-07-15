@@ -29,11 +29,6 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 
 ## Our Team
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team *before* you start
-coding!
-
 | Name | Role | GitHub | LinkedIn |
 | ----------- | ----------- | ----------- |----------- |
 | Jorge Alvarado | Developer | [Alvarado08](https://github.com/Alvarado08) | [in/jorgep-alvarado](https://www.linkedin.com/in/jorgep-alvarado) |
