@@ -35,3 +35,4 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 | Olga Yudkin | Developer | [cvtqx](https://github.com/cvtqx) | [in/olga-yudkin](https://www.linkedin.com/in/olga-yudkin/) |
 | Andrew Arias | Developer | [andresmao85](https://github.com/andresmao85) | [in/andres-ao](https://www.linkedin.com/in/andres-ao/) |
 | Natalie Chan | Developer | [Natkuma01](https://github.com/Natkuma01) | [in/natalie-chan-shimin](https://www.linkedin.com/in/natalie-chan-shimin/) |
+| Adrienne Burney | UI/UX | [Adrienne-B](https://github.com/Adrienne-B) | [in/adrienne-b](https://www.linkedin.com/in/adrienne-burney-ux-ui-designer/) |
