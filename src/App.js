@@ -1,4 +1,5 @@
 import Cart from "./components/Cart/Cart";
+import Menu from "./components/Menu/Menu";
 
 function App() {
   return (
@@ -6,7 +7,8 @@ function App() {
       <header className="App-header">
        <p className='text-5xl flex justify-center font-extrabold text-orange-500 mt-10'>Hungry Rabbit</p>
       </header>
-      <Cart />
+      {/* <Cart /> */}
+      <Menu />
     </div>
   );
 }

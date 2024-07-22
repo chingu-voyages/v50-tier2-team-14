@@ -13,7 +13,7 @@ const cartSlice = createSlice({
             //check if item is already in cart
             const existingItem = state.itemsList.find(item => item.id === newItem.id);
             if (existingItem) {
-                existingItem.count++;
+                existingItem.quantity++;
                 existingItem.price += newItem.price;
             } else {
                 state.itemsList.push({
@@ -24,6 +24,7 @@ const cartSlice = createSlice({
                     name: newItem.name
                 })
             }
+            state.totalQuantity++;
         },
         removeFromCart() { },
         setShowCart(state) {
