@@ -14,12 +14,12 @@ const menuItems = [
 
 const Menu = () => {
     const dispatch = useDispatch();
-    const cart = useSelector(state => state.cart)
+    // const cart = useSelector(state => state.cart)
 
-    console.log(cart)
+    // console.log(cart)
 
     const addToCart = (item) => {
-        console.log(item)
+        // console.log(item)
         dispatch(cartActions.addToCart({
             name: item.name,
             id: item.id,
@@ -37,10 +37,6 @@ const Menu = () => {
             <button onClick={() => addToCart(item)}>Add to Cart</button>
           </li>
         ))}
-      </ul>
-      <h2>Cart</h2>
-      <ul>
-       
       </ul>
     </div>
   );
