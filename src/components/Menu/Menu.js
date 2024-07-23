@@ -14,9 +14,6 @@ const menuItems = [
 
 const Menu = () => {
     const dispatch = useDispatch();
-    // const cart = useSelector(state => state.cart)
-
-    // console.log(cart)
 
     const addToCart = (item) => {
         // console.log(item)
