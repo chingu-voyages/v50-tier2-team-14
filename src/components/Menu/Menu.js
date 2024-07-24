@@ -31,7 +31,11 @@ const Menu = () => {
         {menuItems.map((item) => (
           <li key={item.id}>
             {item.name} - ${item.price.toFixed(2)}
-            <button onClick={() => addToCart(item)}>Add to Cart</button>
+            <button
+              className='btn btn-outline btn-primary'
+              onClick={() => addToCart(item)}>
+              +
+            </button>
           </li>
         ))}
       </ul>

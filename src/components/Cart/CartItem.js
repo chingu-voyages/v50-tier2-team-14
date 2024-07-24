@@ -17,8 +17,13 @@ const CartItem = ({ item }) => {
   return (
     <li>
       <span>{item.name}</span>
-      <span> X {item.quantity}</span> <span>{item.totalPrice.toFixed(2)}USD</span>{' '}
-      <button onClick={() => removeFromCart(item.id)}>Remove</button>
+      <span> X {item.quantity}</span>{' '}
+      <span>{item.totalPrice.toFixed(2)}USD</span>{' '}
+      <button
+        className='btn btn-primary btn-circle'
+        onClick={() => removeFromCart(item.id)}>
+        X
+      </button>
     </li>
   );
 }
