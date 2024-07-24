@@ -17,8 +17,7 @@ const CartItem = ({ item }) => {
   return (
     <li>
       <span>{item.name}</span>
-      <span> X {item.quantity}</span>
-      <span>{item.price.toFixed(2)}</span>
+      <span> X {item.quantity}</span> <span>{item.price.toFixed(2)}USD</span>{' '}
       <button onClick={() => removeFromCart(item.id)}>Remove</button>
     </li>
   );
