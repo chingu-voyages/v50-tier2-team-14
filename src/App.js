@@ -1,8 +1,17 @@
 import Navbar from "./components/Navbar/Navbar";
+import Menu from './components/Menu/Menu';
+import Cart from './components/Cart/Cart';
+import { useSelector } from "react-redux";
 
 function App() {
-  return ( 
-    <Navbar />
+  const cartIsOpen = useSelector(state => state.cart.showCart);
+
+  return (
+    <>
+      <Navbar />
+      <Menu />
+      {cartIsOpen && <Cart />}
+    </>
   );
 }
 
