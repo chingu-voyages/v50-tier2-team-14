@@ -4,10 +4,11 @@ import { cartActions } from '../../store/cart-slice';
 
 const Navbar = () => {
   const cart = useSelector(state => state.cart);
+  const cartIsOpen = useSelector((state) => state.cart.showCart);
   const dispatch = useDispatch();
 
   console.log('Cart', cart);
-  
+
   const cartNotEmpty = cart.totalQuantity > 0;
   const cartTotalPrice = cart.itemsList.reduce(
     (accumulator, item) => {
@@ -58,27 +59,30 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* dropdown modal */}
-          <div
-            tabIndex={0}
-            className='card card-compact dropdown-content bg-accent  text-white z-[1] mt-3 w-52 shadow'>
-            <div className='card-body'>
-              <span className='font-bold'>
-                {cart.totalQuantity}{' '}
-                {cart.totalQuantity === 1 ? 'Item' : 'Items'}
-              </span>
-              <span className='text-success font-bold'>
-                Subtotal:{cartTotalPrice}
-              </span>
-              <div className='card-actions'>
-                <button
-                  className='btn btn-neutral btn-block'
-                  onClick={showCart}>
-                  View cart
-                </button>
+          {/* dropdown modal - dissapears after view cart button is clicked and full cart is opened*/}
+          {!cartIsOpen && (
+            <div
+              tabIndex={0}
+              className='card card-compact dropdown-content bg-accent  text-white z-[1] mt-3 w-52 shadow'>
+              <div className='card-body'>
+                <span className='font-bold'>
+                  {cart.totalQuantity}{' '}
+                  {cart.totalQuantity === 1 ? 'Item' : 'Items'}
+                </span>
+                <span className='text-success font-bold'>
+                  Subtotal:{cartTotalPrice}
+                </span>
+                <div className='card-actions'>
+                  <button
+                    className='btn btn-neutral btn-block'
+                    onClick={showCart}>
+                    View cart
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
           {/* end of dropdown modal */}
         </div>
       </div>
