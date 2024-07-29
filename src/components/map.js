@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import "leaflet/dist/leaflet.css"
 import redMarker from "../asset/red_marker.png"
-import cutlery from"../asset/cutlery.png"
+// import cutlery from"../asset/cutlery.png"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon } from "leaflet"
 
@@ -22,7 +22,21 @@ function Map() {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://menus-api.vercel.app/")
-        setRestaurants(response.data)
+        const data = response.data
+        const categories = Object.values(data)
+        const allRestaurant = []
+
+        categories.forEach(category => 
+          console.log(Array.isArray(category))
+        //   category.forEach(item => {
+        //   allRestaurant.push({
+        //     latitude: item.latitude,
+        //     longitude: item.longitude
+        //   })
+        // })
+      )
+      
+        setRestaurants(allRestaurant)
       } catch (error) {
         console.error("Time to find a new job and practice coding", error)
       }
@@ -40,11 +54,11 @@ function Map() {
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    {/* {restaurants.map(r => ( */}
-    <Marker position={position} icon={customIcon}>
+    {restaurants.map(r => (
+    <Marker position={[r.latitude, r.longitude]} icon={customIcon}>
       <Popup>Joe's KC BBQ</Popup>
     </Marker>
-    {/* ))} */}
+    ))} 
   </MapContainer>
   </div>
   )
