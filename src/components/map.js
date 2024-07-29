@@ -1,9 +1,8 @@
-map.js
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import "leaflet/dist/leaflet.css"
-import redMarker from"./asset/images/red_marker.png"
-import cutlery from"./asset/images/cutlery.png"
+import redMarker from "../asset/red_marker.png"
+import cutlery from"../asset/cutlery.png"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon } from "leaflet"
 
@@ -13,7 +12,7 @@ function Map() {
   const position = [51.505, -0.09]
 
   const customIcon = new Icon({
-    iconUrl: cutlery,
+    iconUrl: redMarker,
     iconSize: [40, 40]
   })
 
@@ -41,10 +40,11 @@ function Map() {
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    {restaurants.map(r => (
-    <Marker key={r.id} position={[r.latitude, r.longitude]} icon={customIcon}>
+    {/* {restaurants.map(r => ( */}
+    <Marker position={position} icon={customIcon}>
+      <Popup>Joe's KC BBQ</Popup>
     </Marker>
-    ))}
+    {/* ))} */}
   </MapContainer>
   </div>
   )
