@@ -23,7 +23,12 @@ const Cart = () => {
     if (cart.totalQuantity > 0) {
       return <ul>{cartItems}</ul>;
     } else {
-      return <TfiFaceSad />;
+      return (
+        <>
+          <TfiFaceSad />
+          <p>Your cart is empty</p>
+        </>
+      );
     }
   };
 
@@ -43,6 +48,7 @@ const Cart = () => {
           <h2 className='card-title'>Your cart</h2>
           <CartContent />
         </div>
+        {/* TO DO: fix position of this button in mobile and desktop */}
         <div className='bg-secondary'>
           <div className='card-actions justify-end'>
             <button
@@ -69,12 +75,6 @@ const Cart = () => {
             <ButtonText />
           </button>
         </div>
-
-        {/* <h2 className='card-title'>New album is released!</h2>
-        <p>Click the button to listen on Spotiwhy app.</p>
-        <div className='card-actions justify-end'>
-          <button className='btn btn-primary'>Listen</button>
-        </div> */}
       </div>
     </div>
   );
