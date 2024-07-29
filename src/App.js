@@ -1,4 +1,7 @@
+import Menu from "./components/Menu/Menu";
+
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
@@ -6,18 +9,7 @@ function App() {
           Hungry Rabbit
         </p>
       </header>
-      <div className="p-5 space-y-4">
-        <h2 className="text-2xl font-semibold">
-          Daisy UI Custom Theme Testing
-        </h2>
-        <div className="flex items-center gap-4">
-          <button className="btn btn-primary">Primary</button>
-          <button className="btn btn-secondary">Secondary</button>
-          <button className="btn btn-accent">Accent</button>
-          <button className="btn btn-neutral">Neutral</button>
-          <button className="btn btn-base-100">Base</button>
-        </div>
-      </div>
+      <Menu />
     </div>
   );
 }
