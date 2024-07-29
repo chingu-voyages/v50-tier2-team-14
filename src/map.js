@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import "leaflet/dist/leaflet.css"
 import redMarker from"./asset/images/red_marker.png"
 import cutlery from"./asset/images/cutlery.png"
@@ -15,6 +16,22 @@ function Map() {
     iconSize: [40, 40]
   })
 
+  const [restaurants, setRestaurants] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://menus-api.vercel.app/")
+        setRestaurants(response.data)
+      } catch (error) {
+        console.error("Time to find a new job and practice coding", error)
+      }
+    }
+    fetchData()}
+    ,[]
+  )
+
+
 
   return (
     <div className="my-10 flex items-center justify-center">
@@ -23,11 +40,10 @@ function Map() {
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    <Marker position={position} icon={customIcon}>
-      <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
-      </Popup>
+    {restaurants.map(r => (
+    <Marker key={r.id} position={[r.latitude, r.longitude]} icon={customIcon}>
     </Marker>
+    ))}
   </MapContainer>
   </div>
   )
