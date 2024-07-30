@@ -1,23 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const MenuItem = ({ item }) => {
-    const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(1);
 
+  const handleAmountChange = (e) => {
+    setAmount(e.target.value);
+  };
 
-    const handleAmountChange = (e) => {
-        setAmount(e.target.value);
-    };
+  const handleAddToCart = (item, amount) => {
+    console.log('adding to cart', amount, item);
+  };
 
-    const handleAddToCart = (item, amount) => {
+  //adds fallback image of a rabbut logo in case img is not dispalyed
+  const handleImageError = (e) => {
+    e.target.src = '/images/logo/rabbit_logo_1.png';
+  };
 
-        console.log('adding to cart', amount, item)
-    };
-    
   return (
     <div className='card w-96  shadow-xl'>
       <figure>
         <img
           src={item.img}
+          onError={handleImageError}
           alt={item.dsc}
         />
       </figure>
@@ -41,6 +45,6 @@ const MenuItem = ({ item }) => {
       </div>
     </div>
   );
-}
+};
 
-export default MenuItem
+export default MenuItem;
