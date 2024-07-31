@@ -9,8 +9,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Menu />
-      {cartIsOpen && <Cart />}
+      {cartIsOpen ? <Cart /> : <Menu />}
     </>
   );
 }

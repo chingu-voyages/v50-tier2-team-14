@@ -7,8 +7,6 @@ const Navbar = () => {
   const cartIsOpen = useSelector((state) => state.cart.showCart);
   const dispatch = useDispatch();
 
-  console.log('Cart', cart);
-
   const cartNotEmpty = cart.totalQuantity > 0;
   const cartTotalPrice = cart.itemsList.reduce(
     (accumulator, item) => {
