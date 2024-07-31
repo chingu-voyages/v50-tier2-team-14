@@ -10,6 +10,7 @@ const Menu = () => {
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantAddress, setRestaurantAddress] = useState('');
 
+
   //latitude and longitude will be passed down from map
   const lat = 40.731142;
   const long = -73.915005;

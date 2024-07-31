@@ -14,18 +14,18 @@ const cartSlice = createSlice({
         (item) => item.id === newItem.id
       );
       if (existingItem) {
-        existingItem.quantity++;
-        existingItem.totalPrice += newItem.price;
+        existingItem.quantity += newItem.quantity;
+        existingItem.totalPrice += newItem.price * newItem.quantity;
       } else {
         state.itemsList.push({
           id: newItem.id,
           price: newItem.price,
-          totalPrice: newItem.price,
-          quantity: 1,
+          totalPrice: newItem.price * newItem.quantity,
+          quantity: newItem.quantity,
           name: newItem.name,
         });
       }
-      state.totalQuantity++;
+      state.totalQuantity += newItem.quantity;
     },
     removeFromCart(state, action) {
       const idToRemove = action.payload;

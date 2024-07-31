@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartActions } from '../../store/cart-slice';
 
 const MenuItem = ({ item }) => {
   const [amount, setAmount] = useState(1);
+  const cart = useSelector(state => state.cart);
+
+  console.log('CART', cart)
+  const dispatch = useDispatch();
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
   };
 
   const handleAddToCart = (item, amount) => {
-    console.log('adding to cart', amount, item);
+    console.log(typeof amount)
+    dispatch(
+      cartActions.addToCart({
+        id: item.id,
+        price: item.price,       
+        quantity: parseInt(amount),
+        name: item.dsc,
+      })
+    );
   };
 
   //adds fallback image of a rabbut logo in case img is not dispalyed
@@ -48,3 +62,4 @@ const MenuItem = ({ item }) => {
 };
 
 export default MenuItem;
+
