@@ -21,6 +21,7 @@ const MenuItem = ({ item }) => {
         price: item.price,       
         quantity: parseInt(amount),
         name: item.dsc,
+        img: item.img
       })
     );
   };
