@@ -1,26 +1,22 @@
 import React from 'react';
 import CartItem from './CartItem';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { TfiFaceSad } from 'react-icons/tfi';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
-   const cartTotalPrice = cart.itemsList.reduce((accumulator, item) => {
-     return accumulator + item.totalPrice;
-   }, 0);
-  
+ 
+  const cartTotalPrice = cart.itemsList.reduce((accumulator, item) => {
+    return accumulator + item.totalPrice;
+  }, 0);
+
   const cartItems = cart.itemsList.map((item) => (
     <CartItem
       item={item}
       key={item.id}
     />
   ));
-
-  // const closeCart = () => {
-  //   dispatch(cartActions.setShowCart());
-  // };
 
   const CartTable = () => {
     return (
@@ -70,7 +66,7 @@ const Cart = () => {
         <div className='py-2 text-lg font-semibold mb-4'>
           Total price: {cartTotalPrice} $
         </div>
-        <button className='btn  hover:bg-accent-800 text-white rounded-full w-full py-3'>
+        <button className='btn hover:bg-accent-800 text-white rounded-full w-full py-3'>
           Proceed to checkout
         </button>
       </div>
@@ -82,7 +78,7 @@ const Cart = () => {
       <h2 className='card-title justify-center pt-10'>Meals in my cart</h2>
       <div className='card-body flex flex-col lg:flex-row gap-4'>
         <CartContent />
-        <OrderSummary/>
+        <OrderSummary />
       </div>
     </div>
   );

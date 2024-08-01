@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
 
 const MenuItem = ({ item }) => {
   const [amount, setAmount] = useState(1);
-  const cart = useSelector(state => state.cart);
 
-  console.log('CART', cart)
   const dispatch = useDispatch();
 
   const handleAmountChange = (e) => {

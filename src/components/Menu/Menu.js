@@ -40,7 +40,6 @@ const Menu = () => {
           restaurant.latitude === lat && restaurant.longitude === long
       );
       const uniqueItems = removeDuplicates(targetRestaurantMenu, 'id');
-      console.log(uniqueItems);
       //get restaurnt name to display on the page
       let restaurant = uniqueItems[0].name;
       //get restaurant address to display on the page
