@@ -13,9 +13,15 @@ const Navbar = () => {
       return accumulator + item.totalPrice},
     0);
   
-   const showCart = () => {
+   const viewCart = () => {
      dispatch(cartActions.setShowCart());
    };
+
+  const cartIconClickHandler = () => {
+    if (cartIsOpen) {
+      dispatch(cartActions.setShowCart());
+    }
+  }
   
   return (
     <div className='navbar bg-neutral relative'>
@@ -31,7 +37,8 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role='button'
-            className='btn bg-secondary btn-ghost btn-circle'>
+            className='btn bg-secondary btn-ghost btn-circle'
+          onClick={cartIconClickHandler}>
             <div className='indicator'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -56,7 +63,7 @@ const Navbar = () => {
               {/* end of badge */}
             </div>
           </div>
-
+{/* TO DO: add one more state to get rid of this modal when cart icon is clicked or find another way */}
           {/* dropdown modal - dissapears after view cart button is clicked and full cart is opened*/}
           {!cartIsOpen && (
             <div
@@ -68,12 +75,12 @@ const Navbar = () => {
                   {cart.totalQuantity === 1 ? 'Item' : 'Items'}
                 </span>
                 <span className='text-success font-bold'>
-                  Subtotal:{cartTotalPrice}
+                  Subtotal:{cartTotalPrice} USD
                 </span>
                 <div className='card-actions'>
                   <button
                     className='btn btn-neutral btn-block'
-                    onClick={showCart}>
+                    onClick={viewCart}>
                     View cart
                   </button>
                 </div>

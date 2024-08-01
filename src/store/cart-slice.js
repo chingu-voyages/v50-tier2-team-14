@@ -8,6 +8,7 @@ const cartSlice = createSlice({
     showCart: false,
   },
   reducers: {
+    // TO DO: create addOneItemToCart action???
     addToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.itemsList.find(
