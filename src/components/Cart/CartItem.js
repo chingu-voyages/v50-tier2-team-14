@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch} from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
+import IncreaseDecreaseAmount from '../UI/IncreaseDecreaseAmount';
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
+  //TO DO: this must remove all items of one kind from the cart, need to update cart-slice
   const removeFromCart = (id) => {
     dispatch(cartActions.removeFromCart(id));
   };
@@ -30,7 +32,9 @@ const CartItem = ({ item }) => {
         </div>
       </td>
       <td>{item.name}</td>
-      <td>-{item.quantity}+</td>
+      <td>
+        <IncreaseDecreaseAmount item={item} />       
+      </td>
       <td>{item.totalPrice.toFixed(2)}USD</td>
       <td>
         <button

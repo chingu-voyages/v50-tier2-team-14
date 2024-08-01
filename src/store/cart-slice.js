@@ -8,7 +8,9 @@ const cartSlice = createSlice({
     showCart: false,
   },
   reducers: {
-    // TO DO: create addOneItemToCart action???
+    // TO DO: create addOneItemToCart action
+    // TO DO: create  removecart action
+    //adds as many items as user selected
     addToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.itemsList.find(
@@ -29,6 +31,7 @@ const cartSlice = createSlice({
       }
       state.totalQuantity += newItem.quantity;
     },
+    //removes 1 item from cart
     removeFromCart(state, action) {
       const idToRemove = action.payload;
       const existingItem = state.itemsList.find(

@@ -12,7 +12,6 @@ const MenuItem = ({ item }) => {
   };
 
   const handleAddToCart = (item, amount) => {
-    console.log(typeof amount)
     dispatch(
       cartActions.addToCart({
         id: item.id,
