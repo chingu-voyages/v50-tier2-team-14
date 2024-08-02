@@ -46,6 +46,7 @@ const cartSlice = createSlice({
       state.totalQuantity--;
 
     },
+    //removes all items of the same kind from cart
     removeAllItemsFromCart(state, action) {
       const idToRemove = action.payload;
       const existingItem = state.itemsList.find(item => item.id === idToRemove);

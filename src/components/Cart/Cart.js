@@ -44,9 +44,11 @@ const Cart = () => {
       return <CartTable />;
     } else {
       return (
-        <div className='lg:w-3/4 w-full bg-white p-4 shadow rounded'>
-          <TfiFaceSad />
-          <p>Your cart is empty</p>
+        <div className='lg:w-3/4 w-full bg-white p-4 shadow rounded text-center flex flex-col items-center'>
+          <p className='my-10'>
+            <TfiFaceSad />
+          </p>
+          <p className='my-10'>Your cart is empty</p>
         </div>
       );
     }

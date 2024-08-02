@@ -4,25 +4,19 @@ import { cartActions } from '../../store/cart-slice';
 
 const Navbar = () => {
   const cart = useSelector(state => state.cart);
-  const cartIsOpen = useSelector((state) => state.cart.showCart);
+
   const dispatch = useDispatch();
 
   const cartNotEmpty = cart.totalQuantity > 0;
-  const cartTotalPrice = cart.itemsList.reduce(
-    (accumulator, item) => {
-      return accumulator + item.totalPrice},
-    0);
+  // const cartTotalPrice = cart.itemsList.reduce(
+  //   (accumulator, item) => {
+  //     return accumulator + item.totalPrice},
+  //   0);
   
    const viewCart = () => {
      dispatch(cartActions.setShowCart());
    };
-
-  const cartIconClickHandler = () => {
-    if (cartIsOpen) {
-      dispatch(cartActions.setShowCart());
-    }
-  }
-  
+ 
   return (
     <div className='navbar bg-neutral relative'>
       <div className='flex-1'>
@@ -38,7 +32,7 @@ const Navbar = () => {
             tabIndex={0}
             role='button'
             className='btn bg-secondary btn-ghost btn-circle'
-          onClick={cartIconClickHandler}>
+            onClick={viewCart}>
             <div className='indicator'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -63,9 +57,9 @@ const Navbar = () => {
               {/* end of badge */}
             </div>
           </div>
-{/* TO DO: add one more state to get rid of this modal when cart icon is clicked or find another way */}
+          {/* TO DO: add one more state to get rid of this modal when cart icon is clicked or find another way */}
           {/* dropdown modal - dissapears after view cart button is clicked and full cart is opened*/}
-          {!cartIsOpen && (
+          {/* {!cartIsOpen && (
             <div
               tabIndex={0}
               className='card card-compact dropdown-content bg-accent  text-white z-[1] mt-3 w-52 shadow'>
@@ -86,7 +80,7 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* end of dropdown modal */}
         </div>

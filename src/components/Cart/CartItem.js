@@ -6,7 +6,6 @@ import IncreaseDecreaseAmount from '../UI/IncreaseDecreaseAmount';
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
-  //TO DO: this must remove all items of one kind from the cart, need to update cart-slice
   const removeFromCart = (id) => {
     dispatch(cartActions.removeAllItemsFromCart(id));
   };
