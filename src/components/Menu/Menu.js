@@ -6,9 +6,9 @@ import MenuItem from './MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Menu = () => {
-
   const dispatch = useDispatch();
-  const { menuItems, restaurantName, restaurantAddress, loading, error } = useSelector(state => state.menu);
+  const { menuItems, restaurantName, restaurantAddress, loading, error } =
+    useSelector((state) => state.menu);
 
   //latitude and longitude will be passed down from map
   const lat = 40.731142;
@@ -16,7 +16,7 @@ const Menu = () => {
 
   useEffect(() => {
     if (menuItems.length === 0) {
-      dispatch(fetchMenuData({lat, long}));
+      dispatch(fetchMenuData({ lat, long }));
     }
   }, [dispatch, menuItems.length, lat, long]);
 
