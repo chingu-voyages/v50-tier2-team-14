@@ -11,8 +11,8 @@ const Menu = () => {
   const [restaurantAddress, setRestaurantAddress] = useState('');
 
   //latitude and longitude will be passed down from map
-  const lat = 39.118173;
-  const long = -84.643265;
+  const lat = 40.787681;
+  const long = -74.256066;
 
   //helper function to remove duplicates from array of objects (because there are duplicates in the API)
 
