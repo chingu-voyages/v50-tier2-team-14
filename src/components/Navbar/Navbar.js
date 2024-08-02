@@ -1,11 +1,12 @@
 import React from 'react';
+import logo from '../../images/logo/rabbit_logo_1.png';
 
 const Navbar = () => {
   return (
     <div className='navbar bg-neutral relative'>
       <div className='flex-1'>
         <img
-          src='images/logo/rabbit_logo_1.png'
+          src={logo}
           alt='Logo'
           width='120px'
         />
