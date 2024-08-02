@@ -8,7 +8,7 @@ const CartItem = ({ item }) => {
 
   //TO DO: this must remove all items of one kind from the cart, need to update cart-slice
   const removeFromCart = (id) => {
-    dispatch(cartActions.removeFromCart(id));
+    dispatch(cartActions.removeAllItemsFromCart(id));
   };
 
   //adds fallback image of a rabbut logo in case img is not dispalyed

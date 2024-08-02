@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
-// TO DO: add addtocart and remove from cart handlers
+
 const IncreaseDecreaseAmount = ({ item }) => {
     const dispatch = useDispatch();
 
