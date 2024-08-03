@@ -32,7 +32,7 @@ const FilterState = () => {
       })
       setRestaurants(allRestaurants)
       // make sure no repeated state
-      const uniqueStates = [...new Set(allRestaurants.map(r => r.state))];
+      const uniqueStates = [...new Set(allRestaurants.map(r => r.state))].filter(state => state.length ===2 )
       setStates(uniqueStates)
     } catch (error) {
       console.error('Error fetching data:', error)
