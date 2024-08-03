@@ -23,20 +23,23 @@ function Map() {
       try {
         const response = await axios.get("https://menus-api.vercel.app/")
         const data = response.data
-        const categories = Object.values(data)
-        const allRestaurant = []
+        const allRestaurants = Object.values(data)
 
-        categories.forEach(category => 
-          console.log(Array.isArray(category))
-        //   category.forEach(item => {
-        //   allRestaurant.push({
-        //     latitude: item.latitude,
-        //     longitude: item.longitude
-        //   })
-        // })
-      )
-      
-        setRestaurants(allRestaurant)
+        // Normalize all data is Array
+        const allRestaurantsArray = allRestaurants.map(item => 
+          Array.isArray(item) ? item : [item]
+        );
+        console.log(allRestaurantsArray[0][0].country.split(', ')[1])
+
+        const latLongArray = allRestaurantsArray.flatMap(restaurantArray => 
+            restaurantArray.map(restaurant => restaurant.id)
+        );
+        console.log("//////////")
+        console.log(latLongArray)
+
+        setRestaurants(latLongArray)
+
+               
       } catch (error) {
         console.error("Time to find a new job and practice coding", error)
       }
@@ -55,7 +58,7 @@ function Map() {
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
     {restaurants.map(r => (
-    <Marker position={[r.latitude, r.longitude]} icon={customIcon}>
+    <Marker key={r.id} position={[r.latitude, r.longitude]} icon={customIcon}>
       <Popup>Joe's KC BBQ</Popup>
     </Marker>
     ))} 
