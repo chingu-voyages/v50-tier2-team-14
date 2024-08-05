@@ -55,7 +55,7 @@ const Cart = () => {
   return (
     <>
       {!cart.showCheckout ? (
-        <div className='container mx-auto my-10 px-4 card w-96 shadow-xl'>
+        <div className='container mx-auto my-10 px-4 card shadow-xl w-96 md:w-full'>
           <h2 className='card-title justify-center pt-10'>Meals in my cart</h2>
           <div className='card-body flex flex-col lg:flex-row gap-4'>
             <CartContent />

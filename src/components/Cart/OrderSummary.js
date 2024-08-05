@@ -13,9 +13,10 @@ const OrderSummary = () => {
     return accumulator + item.totalPrice;
   }, 0);
 
-    const cartTotalPriceWithTip = tipAmount ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0 : cartTotalPrice;
-    ;
-
+  const cartTotalPriceWithTip = tipAmount
+    ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
+      : cartTotalPrice;
+    
   const handleCheckoutClick = () => {
     dispatch(cartActions.setShowCheckout());
   };
@@ -49,13 +50,12 @@ const OrderSummary = () => {
       </div>
     );
   };
-  
-    
+
   const OrderTotal = () => {
     return (
       <div className='mb-4'>
         <h4 className='font-bold my-5 p-5 bg-gray-100 rounded-lg shadow'>
-          Your total is{' '} 
+          Your total is{' '}
           <span className='font-bold ml-10'>
             {cartTotalPriceWithTip.toFixed(2)} USD
           </span>
@@ -79,7 +79,9 @@ const OrderSummary = () => {
       <div className='mb-4'>
         Shipping <span className='font-bold ml-10'> FREE</span>
       </div>
-      <hr className='my-4 border-t-2 border-gray-300' />
+          <hr className='my-4 border-t-2 border-gray-300' />
+          
+      {/* order summary with 'proceed to checkout' button displayed within the cart component*/}
       {!cart.showCheckout && (
         <>
           <div className='py-2 text-lg font-semibold mb-4'>
@@ -92,12 +94,15 @@ const OrderSummary = () => {
           </button>
         </>
       )}
+
+      {/* order summary with 'place order' button displayed within the checkout component*/}
       {cart.showCheckout && (
         <>
           <TipSuggestions />
           <OrderTotal />
         </>
-      )}
+          )}
+          
     </div>
   );
 };
