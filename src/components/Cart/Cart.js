@@ -68,7 +68,7 @@ const Cart = () => {
         <div className='py-2 text-lg font-semibold mb-4'>
           Total price: {cartTotalPrice} $
         </div>
-        <button className='btn hover:bg-accent-800 text-white rounded-full w-full py-3'>
+        <button className='btn hover:bg-accent-800 hover:text-white text-black rounded-full w-full py-3'>
           Proceed to checkout
         </button>
       </div>
