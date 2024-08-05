@@ -8,10 +8,6 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const cartNotEmpty = cart.totalQuantity > 0;
-  // const cartTotalPrice = cart.itemsList.reduce(
-  //   (accumulator, item) => {
-  //     return accumulator + item.totalPrice},
-  //   0);
   
    const viewCart = () => {
      dispatch(cartActions.setShowCart());

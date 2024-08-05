@@ -6,6 +6,7 @@ const cartSlice = createSlice({
     itemsList: [],
     totalQuantity: 0,
     showCart: false,
+    showCheckout: false,
   },
   reducers: {
     //adds as many items as user selected
@@ -55,7 +56,11 @@ const cartSlice = createSlice({
     },
     setShowCart(state) {
       state.showCart = !state.showCart;
+      state.showCheckout = false;
     },
+    setShowCheckout(state) {
+      state.showCheckout = !state.showCheckout;
+    }
   },
 });
 
