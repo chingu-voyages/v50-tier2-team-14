@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
+
+import logo from '../../images/logo/rabbit_logo_1.png';
+
 
 const MenuItem = ({ item }) => {
   const [amount, setAmount] = useState(1);
@@ -23,9 +27,9 @@ const MenuItem = ({ item }) => {
     );
   };
 
-  //adds fallback image of a rabbut logo in case img is not dispalyed
+  //adds fallback image of a rabbit logo in case img is not dispalyed
   const handleImageError = (e) => {
-    e.target.src = '/images/logo/rabbit_logo_1.png';
+    e.target.src = logo;
   };
 
   return (

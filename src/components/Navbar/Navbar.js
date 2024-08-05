@@ -1,6 +1,10 @@
 import React from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
+
+import logo from '../../images/logo/rabbit_logo_1.png';
+
 
 const Navbar = () => {
   const cart = useSelector(state => state.cart);
@@ -21,7 +25,7 @@ const Navbar = () => {
     <div className='navbar bg-neutral relative'>
       <div className='flex-1'>
         <img
-          src='images/logo/rabbit_logo_1.png'
+          src={logo}
           alt='Logo'
           width='120px'
         />

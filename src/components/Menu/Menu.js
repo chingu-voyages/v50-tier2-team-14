@@ -11,8 +11,8 @@ const Menu = () => {
     useSelector((state) => state.menu);
 
   //latitude and longitude will be passed down from map
-  const lat = 40.731142;
-  const long = -73.915005;
+  const lat = 40.787681;
+  const long = -74.256066;
 
   useEffect(() => {
     if (menuItems.length === 0) {
@@ -33,6 +33,9 @@ const Menu = () => {
     <div className='container mx-auto px-8'>
       <h2 className='text-center text-3xl font-bold mt-4'>{restaurantName}</h2>
       <p className='text-center mb-4'>{restaurantAddress}</p>
+      <p className='alert my-8 px-8'>
+        If you see this ugly paragraph, autodeploy works!
+      </p>
       <div className='flex flex-wrap gap-4 justify-center'>
         {menuItems.map((item) => (
           <MenuItem
