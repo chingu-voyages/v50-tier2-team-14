@@ -22,15 +22,18 @@ const MapPage = () => {
                 const response = await axios.get('https://menus-api.vercel.app/')
                 const data = response.data
                 const allRestaurantData = Object.values(data)
-
+        
+                // Normalize all data is Array
                 const normalized = allRestaurantData.map(item => 
                     Array.isArray(item) ? item : [item])
 
+                // push data we needed to use in allRestaurants Array
                 const allRestaurants = []
                 normalized.forEach(category => {
                     category.forEach(restaurant => {
                       if (restaurant.country) {
                         const restaurantState = restaurant.country.split(', ').pop()
+                        // no unique id in the data
                         const id = restaurant.index
                         const name = restaurant.name
                         const latitude = restaurant.latitude
@@ -39,6 +42,7 @@ const MapPage = () => {
                       }
                     })
                 })
+                // get restaurants that located in a specific state
                 const filteredRestaurants = allRestaurants.filter(r => r.state === state)
                 setRestaurants(filteredRestaurants)
                 
@@ -49,7 +53,8 @@ const MapPage = () => {
 
         fetchMenuData()
     }, [state])
-    
+
+    // Set boundary between all restaurants, center groups of markers
     const calculateBounds = (restaurants) => {
         if (restaurants.length === 0) return [[0, 0], [0, 0]]
         const latitudes = restaurants.map(r => r.latitude)
@@ -62,7 +67,6 @@ const MapPage = () => {
     }
 
     const bounds = calculateBounds(restaurants)
-    console.log(restaurants)
 
     const FitBoundsComponent = () => {
         const map = useMap()
