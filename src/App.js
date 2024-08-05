@@ -1,8 +1,10 @@
 import Navbar from "./components/Navbar/Navbar";
 import Menu from "./components/Menu/Menu"
 import Maps from "./components/maps"
+import Cart from './components/Cart/Cart'
 import FilterState from "./components/FilterState"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useSelector } from "react-redux"
 
 
 
@@ -11,7 +13,6 @@ function App() {
 
   return (
     <>
-
     <BrowserRouter>
     <Navbar />
     <Routes>
@@ -20,7 +21,6 @@ function App() {
     </Routes>
     {cartIsOpen ? <Cart /> : <Menu />}
     </BrowserRouter>
-
   </>
   );
 }
