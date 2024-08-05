@@ -12,11 +12,11 @@ function App() {
 
     <BrowserRouter>
     <Navbar />
-    <Menu />
     <Routes>
       <Route path="/" element={<FilterState />} />
       <Route path="/restaurants/:state" element={<Maps />} />
     </Routes>
+    <Menu />
     </BrowserRouter>
 
   </>
