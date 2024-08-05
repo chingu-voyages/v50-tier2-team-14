@@ -7,8 +7,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 function App() {
-  return ( 
-  <>
+  const cartIsOpen = useSelector(state => state.cart.showCart);
+
+  return (
+    <>
 
     <BrowserRouter>
     <Navbar />
@@ -16,7 +18,7 @@ function App() {
       <Route path="/" element={<FilterState />} />
       <Route path="/restaurants/:state" element={<Maps />} />
     </Routes>
-    <Menu />
+    {cartIsOpen ? <Cart /> : <Menu />}
     </BrowserRouter>
 
   </>
