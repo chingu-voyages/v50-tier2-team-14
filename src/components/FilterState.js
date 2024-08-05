@@ -19,7 +19,7 @@ const FilterState = () => {
       const normalized = allRestaurantData.map(item => 
         Array.isArray(item) ? item : [item])
 
-      // allRestaurants = an array with data: restaurant name, state initial
+      // allRestaurants = an array with data: restaurant name, state abbreviation
       const allRestaurants = []
       normalized.forEach(category => {
         category.forEach(restaurant => {
@@ -31,7 +31,7 @@ const FilterState = () => {
         })
       })
       setRestaurants(allRestaurants)
-      // make sure no repeated state
+      // make sure no repeated state and all data are state abbreviation 
       const uniqueStates = [...new Set(allRestaurants.map(r => r.state))].filter(state => state.length ===2 )
       setStates(uniqueStates)
     } catch (error) {
