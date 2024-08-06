@@ -1,9 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Alert from '../UI/Alert';
 
 const OrderSummary = () => {
   const [tipAmount, setTipAmount] = useState('');
+  const [orderPlaced, setOrderPlaced] = useState(false);
+
+  //display green alert for 6 seconds on order placed button click
+  useEffect(() => {
+    setTimeout(() => {
+      setOrderPlaced(!setOrderPlaced);
+    }, 6000);
+  }, [setOrderPlaced]);
 
   const cart = useSelector((state) => state.cart);
 
@@ -15,8 +24,8 @@ const OrderSummary = () => {
 
   const cartTotalPriceWithTip = tipAmount
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
-      : cartTotalPrice;
-    
+    : cartTotalPrice;
+
   const handleCheckoutClick = () => {
     dispatch(cartActions.setShowCheckout());
   };
@@ -25,24 +34,28 @@ const OrderSummary = () => {
     setTipAmount(amount);
   };
 
+  const handlePlaceOrder = () => {
+    console.log('Order placed!');
+    setOrderPlaced(true);
+  };
+
   //TO DO: add custom tip input
-  
+
   const TipSuggestions = () => {
     return (
       <div className='mb-4'>
         <h3 className='text-lg font-bold mb-4'>Select a Tip Percentage</h3>
         <div className='flex space-x-3 mb-4'>
-          {[15, 18, 22, 0].map(tip => {
+          {[15, 18, 22, 0].map((tip) => {
             return (
               <button
                 className={`btn ${
                   tipAmount === tip ? 'btn-primary' : 'btn-secondary'
-                  }`}
+                }`}
                 key={tip}
-                onClick={()=>handleTipSelection(tip)}
-              >
+                onClick={() => handleTipSelection(tip)}>
                 {tip === 0 ? 'No Tip' : `${tip}%`}
-        </button>
+              </button>
             );
           })}
         </div>
@@ -59,7 +72,9 @@ const OrderSummary = () => {
             {cartTotalPriceWithTip.toFixed(2)} USD
           </span>
         </h4>
-        <button className='btn hover:bg-accent-800 hover:text-white text-black rounded-full w-full py-3'>
+        <button
+          className='btn hover:bg-accent-800 hover:text-white text-black rounded-full w-full py-3'
+          onClick={handlePlaceOrder}>
           Place order
         </button>
       </div>
@@ -78,8 +93,8 @@ const OrderSummary = () => {
       <div className='mb-4'>
         Shipping <span className='font-bold ml-10'> FREE</span>
       </div>
-          <hr className='my-4 border-t-2 border-gray-300' />
-          
+      <hr className='my-4 border-t-2 border-gray-300' />
+
       {/* order summary with 'proceed to checkout' button displayed within the cart component*/}
       {!cart.showCheckout && (
         <>
@@ -99,9 +114,9 @@ const OrderSummary = () => {
         <>
           <TipSuggestions />
           <OrderTotal />
+          {orderPlaced && <Alert />}
         </>
-          )}
-          
+      )}
     </div>
   );
 };
