@@ -1,12 +1,12 @@
 import Navbar from "./components/Navbar/Navbar";
-
-import Menu from "./components/Menu/Menu";
+import Menu from './components/Menu/Menu';
+import Cart from './components/Cart/Cart';
+import { useSelector } from "react-redux";
 import Hero from "./components/UI/Hero";
 import { useState } from "react";
 
-
 function App() {
-  const [heroIsOpen, setHeroIsOpen] = useState(true);
+  const cartIsOpen = useSelector(state => state.cart.showCart);  const [heroIsOpen, setHeroIsOpen] = useState(true);
 
   const Layout = () => {
     return (
@@ -15,13 +15,13 @@ function App() {
         <Menu />
       </>
     );
-  }
+}
   return (
     <>
       {heroIsOpen ? (
         <Hero handleHeroButtonClick={() => setHeroIsOpen(false)} />
       ) : (
-        <Layout />
+        {cartIsOpen ? <Cart /> : <Layout  />}
       )}
     </>
   );
