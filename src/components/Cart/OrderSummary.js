@@ -40,6 +40,8 @@ const OrderSummary = () => {
     setTipAmount(amount);
   };
 
+  //TO DO: check localstorage for credits and comare if it;s enough
+  //TO DO: create red alert : not enough credits
   const handlePlaceOrder = () => {
     //display green alert
     setOrderPlaced(true);

@@ -5,6 +5,7 @@ import {  useSelector } from 'react-redux';
 import { TfiFaceSad } from 'react-icons/tfi';
 import Checkout from '../Checkout/Checkout';
 import OrderSummary from './OrderSummary';
+import PaymentSystem from '../PaymentSystem/PaymentSystem';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -63,7 +64,10 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <Checkout />
+          <>
+            <PaymentSystem />
+            <Checkout />
+        </>
       )}
     </>
   );
