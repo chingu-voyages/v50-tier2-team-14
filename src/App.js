@@ -6,13 +6,14 @@ import Hero from "./components/UI/Hero";
 import { useState } from "react";
 
 function App() {
-  const cartIsOpen = useSelector(state => state.cart.showCart);  const [heroIsOpen, setHeroIsOpen] = useState(true);
+  const cartIsOpen = useSelector(state => state.cart.showCart);
+  const [heroIsOpen, setHeroIsOpen] = useState(true);
 
   const Layout = () => {
     return (
       <>
         <Navbar />
-        <Menu />
+        {cartIsOpen ? <Cart /> : <Menu />}
       </>
     );
 }
@@ -21,7 +22,7 @@ function App() {
       {heroIsOpen ? (
         <Hero handleHeroButtonClick={() => setHeroIsOpen(false)} />
       ) : (
-        {cartIsOpen ? <Cart /> : <Layout  />}
+        <Layout />
       )}
     </>
   );

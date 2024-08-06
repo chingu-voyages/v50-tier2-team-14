@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from '../../images/logo/hungry_image.png'
 
 const Hero = ({ handleHeroButtonClick }) => {
   return (
@@ -6,7 +7,7 @@ const Hero = ({ handleHeroButtonClick }) => {
       <div className='hero-content text-center'>
         <div className='max-w-md'>
           <img
-            src='images/logo/hungry_image.png'
+            src={logo}
             alt='hungry rabbit asking if you are hungry'
           />
           <button
