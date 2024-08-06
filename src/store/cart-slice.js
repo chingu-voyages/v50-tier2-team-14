@@ -54,6 +54,10 @@ const cartSlice = createSlice({
       state.itemsList = state.itemsList.filter(item => item.id !== idToRemove);
       state.totalQuantity -= existingItem.quantity;
     },
+    resetCart(state) {
+      state.itemsList = [];
+      state.totalQuantity = 0;
+    },
     setShowCart(state) {
       state.showCart = !state.showCart;
       state.showCheckout = false;

@@ -3,20 +3,26 @@ import { cartActions } from '../../store/cart-slice';
 import { useEffect, useState } from 'react';
 import Alert from '../UI/Alert';
 
+//TODO: redirect to homepage after order has been placed
+
 const OrderSummary = () => {
   const [tipAmount, setTipAmount] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  //display green alert for 6 seconds on order placed button click
-  useEffect(() => {
-    setTimeout(() => {
-      setOrderPlaced(!setOrderPlaced);
-    }, 6000);
-  }, [setOrderPlaced]);
-
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
+
+  //display green alert for 6 seconds on orderplaced button click
+  useEffect(() => {
+    if (orderPlaced) {
+      const timer = setTimeout(() => {
+        setOrderPlaced(false);
+      }, 6000);
+      //cleanup timeout
+      return () => clearTimeout(timer);
+    }
+  }, [orderPlaced]);
 
   const cartTotalPrice = cart.itemsList.reduce((accumulator, item) => {
     return accumulator + item.totalPrice;
@@ -35,8 +41,10 @@ const OrderSummary = () => {
   };
 
   const handlePlaceOrder = () => {
-    console.log('Order placed!');
+    //display green alert
     setOrderPlaced(true);
+    //reset the cart
+    dispatch(cartActions.resetCart());
   };
 
   //TO DO: add custom tip input
