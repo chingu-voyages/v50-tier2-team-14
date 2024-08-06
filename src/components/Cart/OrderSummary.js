@@ -26,26 +26,25 @@ const OrderSummary = () => {
   };
 
   //TO DO: add custom tip input
+  
   const TipSuggestions = () => {
     return (
       <div className='mb-4'>
         <h3 className='text-lg font-bold mb-4'>Select a Tip Percentage</h3>
-        <div className='flex space-x-4 mb-4'>
-          <button
-            className='btn btn-primary'
-            onClick={() => handleTipSelection(15)}>
-            15%
-          </button>
-          <button
-            className='btn btn-primary'
-            onClick={() => handleTipSelection(18)}>
-            18%
-          </button>
-          <button
-            className='btn btn-primary'
-            onClick={() => handleTipSelection(22)}>
-            22%
-          </button>
+        <div className='flex space-x-3 mb-4'>
+          {[15, 18, 22, 0].map(tip => {
+            return (
+              <button
+                className={`btn ${
+                  tipAmount === tip ? 'btn-primary' : 'btn-secondary'
+                  }`}
+                key={tip}
+                onClick={()=>handleTipSelection(tip)}
+              >
+                {tip === 0 ? 'No Tip' : `${tip}%`}
+        </button>
+            );
+          })}
         </div>
       </div>
     );
