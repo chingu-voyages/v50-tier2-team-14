@@ -107,7 +107,7 @@ const OrderSummary = () => {
       {!cart.showCheckout && (
         <>
           <div className='py-2 text-lg font-semibold mb-4'>
-            Total price: {cartTotalPrice} $
+            TOTAL PRICE: {cartTotalPrice} $
           </div>
           <button
             className='btn hover:bg-accent-800 hover:text-white text-black rounded-full w-full py-3'
