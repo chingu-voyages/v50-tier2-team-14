@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
 import { useEffect, useState } from 'react';
-import Alert from '../UI/Alert';
+import Alert from '../UI/SuccessAlert';
 
 //TODO: redirect to homepage after order has been placed
 
