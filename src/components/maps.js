@@ -1,8 +1,13 @@
 // src/pages/MapPage.jsx
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import redMarker from "../images/marker/red_marker.png"
+import burger from "../images/category/burger.png"
+import pizza from "../images/category/pizza.png"
+import fried_chicken from "../images/category/fried_chicken.png"
+import steak from "../images/category/steak.png"
+import desserts from "../images/category/desserts.png"
 import { Icon } from "leaflet"
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
@@ -10,6 +15,7 @@ import 'leaflet/dist/leaflet.css'
 const MapPage = () => {
     const { state } = useParams()
     const [restaurants, setRestaurants] = useState([])
+    const navigate = useNavigate
 
     const customIcon = new Icon({
         iconUrl: redMarker,
@@ -78,10 +84,20 @@ const MapPage = () => {
         return null
     }
 
+
+
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Restaurants in {state}</h1>
-            <MapContainer bounds={bounds} zoom={7} className="h-96">
+        <div className="container mx-auto p-4  mt-10 mb-20">
+            <h1 className="text-2xl font-bold mb-11">Restaurants in {state}</h1>
+            <div className="flex-auto">
+                <img src={burger} alt="burger"/>
+                <img src={pizza} alt="pizza" />
+                <img src={fried_chicken} alt="fried chicken" />
+                <img src={steak} alt="steak" />
+                <img src={desserts} alt="desserts" />
+            </div>
+            <div className="m-8 mx-48">
+            <MapContainer bounds={bounds} zoom={1} className="h-96">
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -93,6 +109,7 @@ const MapPage = () => {
                 ))}
                 <FitBoundsComponent />
             </MapContainer>
+            </div>
         </div>
     )
 }

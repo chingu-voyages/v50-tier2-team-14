@@ -15,7 +15,13 @@ function App() {
   const Layout = () => {
     return (
       <>
-        <Navbar />
+    <Navbar />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<FilterState />} />
+      <Route path="/restaurants/:state" element={<Maps />} />
+    </Routes>
+    </BrowserRouter>
         {cartIsOpen ? <Cart /> : <Menu />}
       </>
     );
@@ -27,12 +33,7 @@ function App() {
       ) : (
         <Layout />
       )}
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<FilterState />} />
-      <Route path="/restaurants/:state" element={<Maps />} />
-    </Routes>
-    </BrowserRouter>
+
     </>
   );
 }
