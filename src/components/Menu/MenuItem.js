@@ -33,7 +33,7 @@ const MenuItem = ({ item }) => {
   };
 
   return (
-    <div className='card w-96  shadow-xl'>
+    <div className='card w-96 shadow-xl'>
       <figure>
         <img
           src={item.img}
