@@ -1,28 +1,35 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
 import { useEffect, useState } from 'react';
-import Alert from '../UI/SuccessAlert';
+import SuccessAlert from '../UI/SuccessAlert';
+import ErrorAlert from '../UI/ErrorAlert';
 
 //TODO: redirect to homepage after order has been placed
 
 const OrderSummary = () => {
   const [tipAmount, setTipAmount] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [orderError, setOrderError] = useState(false);
+
 
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
-  //display green alert for 6 seconds on orderplaced button click
+  //display green or red alert for 5 seconds on orderplaced button click
   useEffect(() => {
-    if (orderPlaced) {
+    if (orderPlaced || orderError) {
       const timer = setTimeout(() => {
-        setOrderPlaced(false);
-      }, 6000);
-      //cleanup timeout
+        if (orderPlaced) {
+          setOrderPlaced(false);
+        }
+        if (orderError) {
+          setOrderError(false);
+        }
+      }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [orderPlaced]);
+  }, [orderPlaced, orderError]);
 
   const cartTotalPrice = cart.itemsList.reduce((accumulator, item) => {
     return accumulator + item.totalPrice;
@@ -32,6 +39,11 @@ const OrderSummary = () => {
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
     : cartTotalPrice;
 
+  const savedCredits = JSON.parse(localStorage.getItem('credits'));
+  
+  const notEnoughCredits = savedCredits < cartTotalPriceWithTip;
+  const updatedCredits = (savedCredits - cartTotalPriceWithTip).toFixed(2);
+
   const handleCheckoutClick = () => {
     dispatch(cartActions.setShowCheckout());
   };
@@ -40,13 +52,32 @@ const OrderSummary = () => {
     setTipAmount(amount);
   };
 
-  //TO DO: check localstorage for credits and comare if it;s enough
-  //TO DO: create red alert : not enough credits
+  
+  //update local storage and dispatch custom event
+  
+  const updateLocalStorage = (newCredits) => {
+    localStorage.setItem('credits', JSON.stringify(newCredits));
+    window.dispatchEvent(new Event('localStorageUpdated'))
+  }
+
   const handlePlaceOrder = () => {
-    //display green alert
-    setOrderPlaced(true);
-    //reset the cart
-    dispatch(cartActions.resetCart());
+    console.log(cart.totalQuantity)
+    setOrderError(false);
+    // Check if there are enough credits and if the cart is not empty
+    if (notEnoughCredits || cart.totalQuantity === 0) {
+      //display red alert
+      console.log('in first if block')
+      setOrderPlaced(false);
+      setOrderError(true);
+    } else {
+      console.log('in else block');
+      //display green alert
+      setOrderPlaced(true);
+      //reset the cart
+      dispatch(cartActions.resetCart());
+      //update localstorage
+      updateLocalStorage(updatedCredits);
+    }
   };
 
   //TO DO: add custom tip input
@@ -124,7 +155,16 @@ const OrderSummary = () => {
         <>
           <TipSuggestions />
           <OrderTotal />
-          {orderPlaced && <Alert />}
+          {orderPlaced && <SuccessAlert />}
+          {orderError && (
+            <ErrorAlert
+              message={
+                notEnoughCredits
+                  ? 'Not enough credits.'
+                  : 'Your cart is empty. Add items to your cart to place order!'
+              }
+            />
+          )}
         </>
       )}
     </div>
