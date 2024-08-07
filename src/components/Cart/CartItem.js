@@ -34,7 +34,7 @@ const CartItem = ({ item }) => {
       <td>
         <IncreaseDecreaseAmount item={item} />       
       </td>
-      <td>{item.totalPrice.toFixed(2)}USD</td>
+      <td>{item.totalPrice.toFixed(2)} $</td>
       <td>
         <button
           className='btn btn-primary btn-circle'

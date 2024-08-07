@@ -48,8 +48,11 @@ const handleSearch = () => {
   }
 
 return (
-    <div className="container mx-auto">
+  <>
+    <div className="ml-20 my-20">
       <h1 className="text-2xl font-bold mb-4">Food Delivery</h1>
+      </div>
+      <div className="flex justify-center align-middle mb-40">
       <select
         className="border p-2"
         value={selectedState}
@@ -66,7 +69,9 @@ return (
       >
         Search
       </button>
-    </div>
+      </div>
+    
+    </>
   )
 }
 
