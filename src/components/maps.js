@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
-import redMarker from "../asset/red_marker.png"
+import redMarker from "../images/marker/red_marker.png"
 import { Icon } from "leaflet"
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
