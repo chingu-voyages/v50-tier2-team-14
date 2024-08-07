@@ -10,7 +10,8 @@ const OrderSummary = () => {
   const [tipAmount, setTipAmount] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderError, setOrderError] = useState(false);
-
+ const [notEnoughCredits, setNotEnoughCredits] = useState(false);
+ const [cartEmpty, setCartEmpty] = useState(false);
 
   const cart = useSelector((state) => state.cart);
 
@@ -20,12 +21,8 @@ const OrderSummary = () => {
   useEffect(() => {
     if (orderPlaced || orderError) {
       const timer = setTimeout(() => {
-        if (orderPlaced) {
-          setOrderPlaced(false);
-        }
-        if (orderError) {
+          setOrderPlaced(false);      
           setOrderError(false);
-        }
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -39,11 +36,13 @@ const OrderSummary = () => {
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
     : cartTotalPrice;
 
-  const savedCredits = JSON.parse(localStorage.getItem('credits'));
-  
-  const notEnoughCredits = savedCredits < cartTotalPriceWithTip;
-  const updatedCredits = (savedCredits - cartTotalPriceWithTip).toFixed(2);
+  const savedCredits = JSON.parse(localStorage.getItem('credits')) || 0;
 
+   useEffect(() => {
+     setNotEnoughCredits(savedCredits < cartTotalPriceWithTip);
+     setCartEmpty(cart.totalQuantity === 0);
+   }, [cart.totalQuantity, cartTotalPriceWithTip, savedCredits]);
+  
   const handleCheckoutClick = () => {
     dispatch(cartActions.setShowCheckout());
   };
@@ -53,7 +52,7 @@ const OrderSummary = () => {
   };
 
   
-  //update local storage and dispatch custom event
+  //update local storage when order is placed and dispatch custom event
   
   const updateLocalStorage = (newCredits) => {
     localStorage.setItem('credits', JSON.stringify(newCredits));
@@ -61,22 +60,20 @@ const OrderSummary = () => {
   }
 
   const handlePlaceOrder = () => {
-    console.log(cart.totalQuantity)
+   
     setOrderError(false);
     // Check if there are enough credits and if the cart is not empty
-    if (notEnoughCredits || cart.totalQuantity === 0) {
+    if (notEnoughCredits || cartEmpty) {
       //display red alert
-      console.log('in first if block')
       setOrderPlaced(false);
       setOrderError(true);
     } else {
-      console.log('in else block');
       //display green alert
       setOrderPlaced(true);
       //reset the cart
       dispatch(cartActions.resetCart());
       //update localstorage
-      updateLocalStorage(updatedCredits);
+      updateLocalStorage((savedCredits - cartTotalPriceWithTip).toFixed(2));
     }
   };
 
