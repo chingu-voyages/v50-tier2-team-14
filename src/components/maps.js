@@ -84,13 +84,16 @@ const MapPage = () => {
         return null
     }
 
+    const handleClick = () => {
+        navigate()
+    }
 
 
     return (
         <div className="container mx-auto p-4  mt-10 mb-20">
             <h1 className="text-2xl font-bold mb-11">Restaurants in {state}</h1>
-            <div className="flex-auto">
-                <img src={burger} alt="burger"/>
+            <div className="flex justify-evenly">
+                <img src={burger} alt="burger" onClick={handleClick}/>
                 <img src={pizza} alt="pizza" />
                 <img src={fried_chicken} alt="fried chicken" />
                 <img src={steak} alt="steak" />
