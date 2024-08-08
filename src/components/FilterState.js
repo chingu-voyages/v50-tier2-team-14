@@ -1,7 +1,7 @@
-// src/components/FilterState.js
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { stateFullName } from '../utils/stateFullName.js'
 
 const FilterState = () => {
   const [restaurants, setRestaurants] = useState([])
@@ -34,6 +34,16 @@ const FilterState = () => {
       // make sure no repeated state and all data are state abbreviation 
       const uniqueStates = [...new Set(allRestaurants.map(r => r.state))].filter(state => state.length ===2 )
       setStates(uniqueStates)
+      
+      const sortedStates = uniqueStates
+      .map(state => ({
+        abbreviation: state,
+        fullName: stateFullName[state]
+      }))
+      .filter(state => state.fullName)
+      .sort((a, b) => a.fullName.localeCompare(b.fullName)); 
+      setStates(sortedStates)
+
     } catch (error) {
       console.error('Error fetching data:', error)
     }
@@ -60,7 +70,7 @@ return (
       >
         <option value="" disabled>Select a State</option>
         {states.map(state => (
-          <option key={state} value={state}>{state}</option>
+          <option key={state.abbreviation} value={state.abbreviation}>{state.fullName}</option>
         ))}
       </select>
       <button
