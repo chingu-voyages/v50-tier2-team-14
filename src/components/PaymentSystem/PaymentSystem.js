@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import coin from '../../images/coin.jpg'
+import coin from '../../images/coin.jpg';
+
 
 const PaymentSystem = () => {
   const [credits, setCredits] = useState(0);
@@ -8,33 +9,32 @@ const PaymentSystem = () => {
     setCredits((prevCredits) => parseInt(prevCredits) + 10);
   };
 
-  // Retrieve from localStorage
+  //function to get saved credits from localStorage if there are any
+  const loadCredits = () => {
+    const savedCredits = JSON.parse(localStorage.getItem('credits'));
+    if (savedCredits) {
+      setCredits(savedCredits);
+    }
+  };
+
+  // get saved credits from local storage when the component mounts
   useEffect(() => {
-    const updateCredits = () => {
-      const savedCredits = JSON.parse(localStorage.getItem('credits'));
-      if (savedCredits) {
-        setCredits(savedCredits);
-      }
+    loadCredits();
+
+    // add event listener to listen for updates in local storage
+    const handleStorageUpdate = () => {
+      loadCredits();
     };
+    window.addEventListener('localStorageUpdated', handleStorageUpdate);
 
-    // Initial load
-    updateCredits();
-
-    // Event listeners for localStorage changes
-    window.addEventListener('localStorageUpdated', updateCredits);
-    window.addEventListener('storage', updateCredits);
-
-    // Cleanup event listeners on component unmount
     return () => {
-      window.removeEventListener('localStorageUpdated', updateCredits);
-      window.removeEventListener('storage', updateCredits);
+      window.removeEventListener('localStorageUpdated', handleStorageUpdate);
     };
   }, []);
 
-  // Store in local storage whenever credits state changes
+  //save credits to local storage when their value changes
   useEffect(() => {
     localStorage.setItem('credits', JSON.stringify(credits));
-    window.dispatchEvent(new Event('localStorageUpdated'))
   }, [credits]);
 
   return (
@@ -44,7 +44,7 @@ const PaymentSystem = () => {
         <p>
           {credits === 0
             ? 'You have 0 credits. Quick, click the coin to add credits to your account!'
-            : `Yaay! You have ${parseInt(credits)} credits.`}
+            : `Yaay! You have ${credits} credits.`}
         </p>
         <div className='flex justify-center'>
           <img
@@ -60,6 +60,6 @@ const PaymentSystem = () => {
       </div>
     </div>
   );
-}
+};
 
-export default PaymentSystem
+export default PaymentSystem;

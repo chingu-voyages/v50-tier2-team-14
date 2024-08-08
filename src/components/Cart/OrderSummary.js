@@ -38,9 +38,18 @@ const OrderSummary = () => {
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
     : cartTotalPrice;
 
+  //parse data from localstorage
+  let savedCredits = 0;
+  try {
+    savedCredits = JSON.parse(localStorage.getItem('credits')) || 0;
+    if (typeof savedCredits !== 'number') {
+      savedCredits = 0;
+    }
+  } catch (error) {
+    savedCredits = 0
+  }
   
-  const savedCredits = parseInt(JSON.parse(localStorage.getItem('credits'))) || 0;
-console.log(typeof cartTotalPriceWithTip);
+
    useEffect(() => {
      setNotEnoughCredits(savedCredits < cartTotalPriceWithTip);
      setCartEmpty(cart.totalQuantity === 0);
@@ -55,10 +64,8 @@ console.log(typeof cartTotalPriceWithTip);
   };
 
   
-  //update local storage when order is placed and dispatch custom event
-  
+  //update local storage when order is placed and dispatch custom event  
   const updateLocalStorage = (newCredits) => {
-    console.log(typeof newCredits)
     localStorage.setItem('credits', JSON.stringify(newCredits));
     window.dispatchEvent(new Event('localStorageUpdated'))
   }
