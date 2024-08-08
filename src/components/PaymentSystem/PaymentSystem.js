@@ -11,8 +11,8 @@ const PaymentSystem = () => {
 
   //function to get saved credits from localStorage if there are any
   const loadCredits = () => {
-    const savedCredits = JSON.parse(localStorage.getItem('credits'));
-    if (savedCredits) {
+    const savedCredits = JSON.parse(localStorage.getItem('credits'));  
+    if(savedCredits){
       setCredits(savedCredits);
     }
   };

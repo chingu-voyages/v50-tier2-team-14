@@ -38,16 +38,16 @@ const OrderSummary = () => {
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
     : cartTotalPrice;
 
-  //parse data from localstorage
+  //parse data from localstorage, ensure that the number is > 0
   let savedCredits = 0;
   try {
-    savedCredits = JSON.parse(localStorage.getItem('credits')) || 0;
-    if (typeof savedCredits !== 'number') {
+    savedCredits = JSON.parse(localStorage.getItem('credits'));
+    if (savedCredits < 0) {
       savedCredits = 0;
     }
   } catch (error) {
     savedCredits = 0
-  }
+  };
   
 
    useEffect(() => {
@@ -63,12 +63,14 @@ const OrderSummary = () => {
     setTipAmount(amount);
   };
 
-  
+ 
   //update local storage when order is placed and dispatch custom event  
   const updateLocalStorage = (newCredits) => {
-    localStorage.setItem('credits', JSON.stringify(newCredits));
+    const creditsToSave = Math.max(0, parseFloat(newCredits));
+    localStorage.setItem('credits', JSON.stringify(creditsToSave.toFixed(2)));
     window.dispatchEvent(new Event('localStorageUpdated'))
   }
+
 
   const handlePlaceOrder = () => {
    
@@ -83,8 +85,10 @@ const OrderSummary = () => {
       setOrderPlaced(true);
       //reset the cart
       dispatch(cartActions.resetCart());
+      //calculate thew new credits
+      const newCredits = parseFloat(savedCredits) - parseFloat(cartTotalPriceWithTip);
       //update localstorage
-      updateLocalStorage((savedCredits - cartTotalPriceWithTip).toFixed(2));
+      updateLocalStorage(Math.max(0, newCredits));
     }
   };
 
