@@ -64,10 +64,10 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-          <>
-            <PaymentSystem />
-            <Checkout />
-        </>
+        <div className='flex flex-col sm:flex-row gap-1'>
+          <PaymentSystem />
+          <Checkout />
+        </div>
       )}
     </>
   );

@@ -38,7 +38,7 @@ const PaymentSystem = () => {
   }, [credits]);
 
   return (
-    <div className='container mx-auto my-10 px-4 card w-96 shadow-xl'>
+    <div className='container mx-auto sm:mr-2 my-10 px-4 card w-96 shadow-xl'>
       <h2 className='card-title justify-center pt-10'>Your credits</h2>
       <div className='card-body text-center'>
         <p>
