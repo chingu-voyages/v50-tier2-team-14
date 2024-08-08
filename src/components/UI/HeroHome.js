@@ -2,11 +2,11 @@ import React from "react";
 
 import logo from "../../images/logo/rabbit_marker.png";
 
-const HeroHome = () => {
+const HeroHome = ({ handleHeroMenuButtonClick }) => {
   return (
-    <div className="hero bg-neutral min-h-screen">
-      <div className="hero-content flex-col lg:flex-row gap-6">
-        <img src={logo} className="w-full max-w-lg" />
+    <section className="hero bg-neutral min-h-screen py-8">
+      <div className="hero-content flex-col items-center justify-center lg:flex-row gap-6">
+        <img src={logo} className="w-full max-w-sm md:max-w-lg" />
         <div>
           <h1 className="text-5xl font-bold uppercase text-primary">
             hungry rabbit
@@ -41,7 +41,10 @@ const HeroHome = () => {
               className="grow"
               placeholder="Enter city or zip code"
             />
-            <button className="bg-gray-300 overflow-hidden h-full p-4 inline-flex justify-center items-center group hover:bg-gray-200 ">
+            <button
+              onClick={handleHeroMenuButtonClick}
+              className="bg-gray-300 overflow-hidden h-full p-4 inline-flex justify-center items-center group hover:bg-gray-200"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -60,7 +63,7 @@ const HeroHome = () => {
           </label>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

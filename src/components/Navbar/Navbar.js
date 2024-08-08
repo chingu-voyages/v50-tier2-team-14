@@ -5,7 +5,7 @@ import { cartActions } from "../../store/cart-slice";
 
 import logo from "../../images/logo/rabbit_logo_1.png";
 
-const Navbar = () => {
+const Navbar = ({ handleCloseMenu }) => {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -19,7 +19,13 @@ const Navbar = () => {
   return (
     <div className="navbar bg-white relative">
       <div className="flex-1">
-        <img src={logo} alt="Logo" width="120px" />
+        <img
+          src={logo}
+          alt="Logo"
+          width="120px"
+          onClick={handleCloseMenu}
+          className="hover:cursor-pointer"
+        />
       </div>
       <div className="flex-none absolute right-10">
         <div className="dropdown dropdown-end">

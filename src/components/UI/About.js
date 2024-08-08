@@ -4,9 +4,9 @@ import logo from "../../images/logo/rabbit_marker.png";
 
 const About = () => {
   return (
-    <div className="hero bg-white min-h-screen">
+    <section className="hero bg-white min-h-screen py-8">
       <div className="hero-content flex-col lg:flex-row gap-6">
-        <img src={logo} className="w-full max-w-lg" />
+        <img src={logo} className="w-full max-w-sm md:max-w-lg" />
         <div>
           <h1 className="text-5xl font-bold uppercase text-primary">
             about us
@@ -24,7 +24,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

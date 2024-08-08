@@ -3,13 +3,15 @@ import React from "react";
 import HeroHome from "../UI/HeroHome";
 import About from "../UI/About";
 import HowTo from "../UI/HowTo";
+import Testimonials from "../UI/Testimonials";
 
-const Home = () => {
+const Home = ({ handleHeroButtonClick }) => {
   return (
     <div>
-      <HeroHome />
+      <HeroHome handleHeroMenuButtonClick={handleHeroButtonClick} />
       <About />
       <HowTo />
+      <Testimonials />
     </div>
   );
 };
