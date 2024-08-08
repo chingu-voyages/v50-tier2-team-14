@@ -42,6 +42,7 @@ const RestaurantsByState = () => {
                         const name = restaurant.name
                         const latitude = restaurant.latitude
                         const longitude = restaurant.longitude
+                        const image = restaurant.img
                         allRestaurants.push({ id, name, latitude, longitude, state: restaurantState })
                       }
                     })

@@ -64,7 +64,7 @@ return (
       </div>
       <div className="flex justify-center align-middle mb-40">
       <select
-        className="border p-2"
+        className="select select-bordered w-full max-w-xs"
         value={selectedState}
         onChange={e => setSelectedState(e.target.value)}
       >
@@ -74,7 +74,7 @@ return (
         ))}
       </select>
       <button
-        className="bg-blue-500 text-white p-2 ml-2"
+        className="btn btn-active btn-ghost mx-4"
         onClick={handleSearch}
       >
         Search
