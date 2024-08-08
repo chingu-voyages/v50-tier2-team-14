@@ -5,7 +5,7 @@ const PaymentSystem = () => {
   const [credits, setCredits] = useState(0);
 
   const handleCoinClick = () => {
-    setCredits((prevCredits) => prevCredits + 10);
+    setCredits((prevCredits) => parseInt(prevCredits) + 10);
   };
 
   // Retrieve from localStorage
@@ -13,7 +13,7 @@ const PaymentSystem = () => {
     const updateCredits = () => {
       const savedCredits = JSON.parse(localStorage.getItem('credits'));
       if (savedCredits) {
-        setCredits(parseInt(savedCredits, 10));
+        setCredits(savedCredits);
       }
     };
 
@@ -44,7 +44,7 @@ const PaymentSystem = () => {
         <p>
           {credits === 0
             ? 'You have 0 credits. Quick, click the coin to add credits to your account!'
-            : `Yaay! You have ${credits} credits.`}
+            : `Yaay! You have ${parseInt(credits)} credits.`}
         </p>
         <div className='flex justify-center'>
           <img

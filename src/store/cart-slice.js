@@ -64,6 +64,15 @@ const cartSlice = createSlice({
     },
     setShowCheckout(state) {
       state.showCheckout = !state.showCheckout;
+    },
+    //replaces cart data with data from localStorage
+    replaceCart(state, action) {
+      const { itemsList, totalQuantity, showCart, showCheckout } =
+        action.payload;
+      state.itemsList = itemsList;
+      state.totalQuantity = totalQuantity;
+      state.showCart = showCart;
+      state.showCheckout = showCheckout;
     }
   },
 });

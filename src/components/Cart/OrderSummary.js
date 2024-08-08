@@ -10,8 +10,8 @@ const OrderSummary = () => {
   const [tipAmount, setTipAmount] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderError, setOrderError] = useState(false);
- const [notEnoughCredits, setNotEnoughCredits] = useState(false);
- const [cartEmpty, setCartEmpty] = useState(false);
+  const [notEnoughCredits, setNotEnoughCredits] = useState(false);
+  const [cartEmpty, setCartEmpty] = useState(false);
 
   const cart = useSelector((state) => state.cart);
 
@@ -22,7 +22,9 @@ const OrderSummary = () => {
     if (orderPlaced || orderError) {
       const timer = setTimeout(() => {
           setOrderPlaced(false);      
-          setOrderError(false);
+        setOrderError(false);
+        setNotEnoughCredits(false);
+        
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -36,8 +38,9 @@ const OrderSummary = () => {
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
     : cartTotalPrice;
 
-  const savedCredits = JSON.parse(localStorage.getItem('credits')) || 0;
-
+  
+  const savedCredits = parseInt(JSON.parse(localStorage.getItem('credits'))) || 0;
+console.log(typeof cartTotalPriceWithTip);
    useEffect(() => {
      setNotEnoughCredits(savedCredits < cartTotalPriceWithTip);
      setCartEmpty(cart.totalQuantity === 0);
@@ -55,6 +58,7 @@ const OrderSummary = () => {
   //update local storage when order is placed and dispatch custom event
   
   const updateLocalStorage = (newCredits) => {
+    console.log(typeof newCredits)
     localStorage.setItem('credits', JSON.stringify(newCredits));
     window.dispatchEvent(new Event('localStorageUpdated'))
   }
