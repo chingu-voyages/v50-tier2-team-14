@@ -1,18 +1,17 @@
-// src/pages/MapPage.jsx
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
-import redMarker from "../images/marker/red_marker.png"
-import burger from "../images/category/burger.png"
-import pizza from "../images/category/pizza.png"
-import fried_chicken from "../images/category/fried_chicken.png"
-import steak from "../images/category/steak.png"
-import desserts from "../images/category/desserts.png"
+import redMarker from "../../images/marker/red_marker.png"
+import burger from "../../images/category/burger.png"
+import pizza from "../../images/category/pizza.png"
+import fried_chicken from "../../images/category/fried_chicken.png"
+import steak from "../../images/category/steak.png"
+import desserts from "../../images/category/desserts.png"
 import { Icon } from "leaflet"
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
 
-const MapPage = () => {
+const RestaurantsByState = () => {
     const { state } = useParams()
     const [restaurants, setRestaurants] = useState([])
     const navigate = useNavigate()
@@ -39,7 +38,6 @@ const MapPage = () => {
                     category.forEach(restaurant => {
                       if (restaurant.country) {
                         const restaurantState = restaurant.country.split(', ').pop()
-                        // no unique id in the data
                         const id = Math.random()
                         const name = restaurant.name
                         const latitude = restaurant.latitude
@@ -128,4 +126,4 @@ const MapPage = () => {
     )
 }
 
-export default MapPage
+export default RestaurantsByState

@@ -2,17 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
-import redMarker from "../images/marker/red_marker.png"
-import burger from "../images/category/burger.png"
-import pizza from "../images/category/pizza.png"
-import fried_chicken from "../images/category/fried_chicken.png"
-import steak from "../images/category/steak.png"
-import desserts from "../images/category/desserts.png"
+import redMarker from "../../images/marker/red_marker.png"
+import burger from "../../images/category/burger.png"
+import pizza from "../../images/category/pizza.png"
+import fried_chicken from "../../images/category/fried_chicken.png"
+import steak from "../../images/category/steak.png"
+import desserts from "../../images/category/desserts.png"
 import { Icon } from "leaflet"
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
 
-const CategoryMapPage = () => {
+const FilterByCategory = () => {
     const { state, category } = useParams()
     const [restaurants, setRestaurants] = useState([])
     const navigate = useNavigate()
@@ -107,4 +107,4 @@ const CategoryMapPage = () => {
     )
 }
 
-export default CategoryMapPage
+export default FilterByCategory

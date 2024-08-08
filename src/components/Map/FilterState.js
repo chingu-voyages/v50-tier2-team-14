@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { stateFullName } from '../utils/stateFullName.js'
+import { stateFullName } from '../../utils/stateFullName.js'
 
 const FilterState = () => {
   const [restaurants, setRestaurants] = useState([])

@@ -1,9 +1,9 @@
 import Navbar from "./components/Navbar/Navbar";
 import Menu from "./components/Menu/Menu"
-import MapPage from "./components/MapPage"
+import RestaurantsByState from "./components/Map/RestaurantsByState"
 import Cart from './components/Cart/Cart'
-import FilterState from "./components/FilterState"
-import FilterByCategory from "./components/FilterByCategory"
+import FilterState from "./components/Map/FilterState"
+import FilterByCategory from "./components/Map/FilterByCategory"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import Hero from "./components/UI/Hero";
@@ -20,7 +20,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<FilterState />} />
-      <Route path="/restaurants/:state" element={<MapPage />} />
+      <Route path="/restaurants/:state" element={<RestaurantsByState />} />
       <Route path="/category-map/:state/:category" element={<FilterByCategory />} />
     </Routes>
     </BrowserRouter>
