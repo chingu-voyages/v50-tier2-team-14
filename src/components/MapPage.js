@@ -15,7 +15,7 @@ import 'leaflet/dist/leaflet.css'
 const MapPage = () => {
     const { state } = useParams()
     const [restaurants, setRestaurants] = useState([])
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
     const customIcon = new Icon({
         iconUrl: redMarker,
@@ -40,7 +40,7 @@ const MapPage = () => {
                       if (restaurant.country) {
                         const restaurantState = restaurant.country.split(', ').pop()
                         // no unique id in the data
-                        const id = restaurant.index
+                        const id = Math.random()
                         const name = restaurant.name
                         const latitude = restaurant.latitude
                         const longitude = restaurant.longitude
@@ -48,6 +48,7 @@ const MapPage = () => {
                       }
                     })
                 })
+
                 // get restaurants that located in a specific state
                 const filteredRestaurants = allRestaurants.filter(r => r.state === state)
                 setRestaurants(filteredRestaurants)
@@ -108,7 +109,6 @@ const MapPage = () => {
                 <p>FRIED CHICKEN</p>
                 <p>STEAK</p>
                 <p>DESSERT</p>
-
             </div>
             <div className="m-8 mx-48">
             <MapContainer bounds={bounds} zoom={1} className="h-96">

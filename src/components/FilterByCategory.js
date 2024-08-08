@@ -78,9 +78,17 @@ const CategoryMapPage = () => {
                 <img src={steak} alt="steak" className='cursor-pointer' onClick={() => handleCategoryClick('steak')} />
                 <img src={desserts} alt="desserts" className='cursor-pointer' onClick={() => handleCategoryClick('desserts')} />
             </div>
+            <div className="flex justify-evenly mb-24">
+                <p>BURGER</p>
+                <p>PIZZA</p>
+                <p>FRIED CHICKEN</p>
+                <p>STEAK</p>
+                <p>DESSERT</p>
+            </div>
                 {restaurants.length === 0 ? (
                     <p>No results found</p>
                 ): (
+                <div className="m-8 mx-48">
                 <MapContainer bounds={bounds} zoom={8} className="h-96">
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -93,6 +101,7 @@ const CategoryMapPage = () => {
                 ))}
                   <FitBoundsComponent />
                 </MapContainer>
+                </div>
         )}
         </div>
     )
