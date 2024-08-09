@@ -9,15 +9,13 @@ let isFirstRender = true;
 
 function App() {
   const cart = useSelector((state) => state.cart);
-console.log('Cart',cart)
-  //TO DO add cart state to local storage
+ 
   const dispatch = useDispatch();
 
-  //Initialize state from local storage if available - THIS DOES NOT WORK!!!
+  //Initialize state from local storage if available
   useEffect(() => {
     const getStorageCartData = () => {
       const savedCart = JSON.parse(localStorage.getItem('cart'));
-      console.log('Loaded cart from localStorage:', savedCart);
       if (savedCart) {
         
         dispatch(
@@ -33,14 +31,13 @@ console.log('Cart',cart)
 
   }, [dispatch]);
 
-  // //Save cart data to local storage whenever it changes
+  // Save cart data to local storage whenever it changes
   useEffect(() => {
     if (isFirstRender) {
       isFirstRender = false;
       return;
     }
     if (cart.changed) {
-      // console.log('storage updated')
       localStorage.setItem('cart', JSON.stringify(cart));
     }
     
