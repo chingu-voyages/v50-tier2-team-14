@@ -10,6 +10,8 @@ import desserts from "../../images/category/desserts.png"
 import { Icon } from "leaflet"
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
+import { stateFullName } from '../../utils/stateFullName.js'
+
 
 const RestaurantsByState = () => {
     const { state } = useParams()
@@ -51,7 +53,7 @@ const RestaurantsByState = () => {
                 // get restaurants that located in a specific state
                 const filteredRestaurants = allRestaurants.filter(r => r.state === state)
                 setRestaurants(filteredRestaurants)
-                
+
             } catch (error) {
                 console.error("Error fetching the menu data", error)
             }
@@ -63,6 +65,7 @@ const RestaurantsByState = () => {
     const handleCategoryClick = (category) => {
         navigate(`/category-map/${state}/${category}`)
     }
+
 
     // Set boundary between all restaurants, center groups of markers
     const calculateBounds = (restaurants) => {
@@ -88,29 +91,26 @@ const RestaurantsByState = () => {
         return null
     }
 
-    
-    
-
-
+    const stateName = stateFullName[state]
     return (
         <div className="container mx-auto p-4  mt-10 mb-20">
-            <h1 className="text-2xl font-bold mb-11">Restaurants in {state}</h1>
+            <h1 className="text-2xl font-bold mb-11">Restaurants in {stateName}</h1>
             <div className="flex justify-evenly">
-                <img src={burger} alt="burger" className='size-40 font-extrabold cursor-pointer' onClick={() => handleCategoryClick('burgers')} />
-                <img src={pizza} alt="pizza" className='size-40 cursor-pointer' onClick={() => handleCategoryClick('pizza')} />
-                <img src={fried_chicken} alt="fried chicken" className='size-40 cursor-pointer' onClick={() => handleCategoryClick('fried_chicken')} />
-                <img src={steak} alt="steak" className='size-40 cursor-pointer' onClick={() => handleCategoryClick('steak')} />
-                <img src={desserts} alt="desserts" className='size-40 cursor-pointer' onClick={() => handleCategoryClick('desserts')} />
+                <img src={burger} alt="burger" className='size-32 cursor-pointer' onClick={() => handleCategoryClick('burgers')} />
+                <img src={pizza} alt="pizza" className='size-32 cursor-pointer' onClick={() => handleCategoryClick('pizza')} />
+                <img src={fried_chicken} alt="fried chicken" className='size-32 cursor-pointer' onClick={() => handleCategoryClick('fried_chicken')} />
+                <img src={steak} alt="steak" className='size-32 cursor-pointer' onClick={() => handleCategoryClick('steak')} />
+                <img src={desserts} alt="desserts" className='size-32 cursor-pointer' onClick={() => handleCategoryClick('desserts')} />
             </div>
             <div className="flex justify-evenly mb-24">
-                <p>BURGER</p>
-                <p>PIZZA</p>
-                <p>FRIED CHICKEN</p>
-                <p>STEAK</p>
-                <p>DESSERT</p>
+            <p className='font-extrabold'>BURGER</p>
+            <p className='font-extrabold'>PIZZA</p>
+            <p className='font-extrabold'>FRIED CHICKEN</p>
+            <p className='font-extrabold'>STEAK</p>
+            <p className='font-extrabold'>DESSERT</p>
             </div>
             <div className="m-8 mx-48">
-            <MapContainer bounds={bounds} zoom={1} className="h-96">
+            <MapContainer bounds={bounds} zoom={1} className="h-96 ounded-xl shadow-lg">
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

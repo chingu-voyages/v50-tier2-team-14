@@ -37,6 +37,7 @@ const FilterState = () => {
       const uniqueStates = [...new Set(allRestaurants.map(r => r.state))].filter(state => state.length ===2 )
       setStates(uniqueStates)
       
+      // Convert state abbreviation to full name, and sort them by alphabet
       const sortedStates = uniqueStates
       .map(state => ({
         abbreviation: state,
