@@ -10,14 +10,13 @@ import Hero from './components/UI/Hero';
 import { useState } from 'react';
 
 function App() {
-  const cartIsOpen = useSelector((state) => state.cart.showCart);
+   const cartIsOpen = useSelector((state) => state.cart.showCart);
   const [heroIsOpen, setHeroIsOpen] = useState(true);
 
   const Layout = () => {
     return (
       <>
         <Navbar />
-        {cartIsOpen && <Cart />}
         <Routes>
           <Route
             path='/'
@@ -35,7 +34,12 @@ function App() {
             path='/restaurants/menu/:name'
             element={<Menu />}
           />
+          <Route
+            path='/cart'
+            element={<Cart />}
+          />
         </Routes>
+        {cartIsOpen && <Cart />} {/* Conditional rendering for Cart */}
       </>
     );
   };

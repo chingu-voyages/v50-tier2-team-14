@@ -1,22 +1,19 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../store/cart-slice";
+import {  useSelector } from "react-redux";
 
 import logo from "../../images/logo/rabbit_logo_1.png";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ handleCloseMenu }) => {
+const Navbar = () => {
   const cart = useSelector((state) => state.cart);
-
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const cartNotEmpty = cart.totalQuantity > 0;
 
   const viewCart = () => {
-    dispatch(cartActions.setShowCart());
+    navigate('/cart');
   };
 
   return (
@@ -26,9 +23,8 @@ const Navbar = ({ handleCloseMenu }) => {
           src={logo}
           alt='Logo'
           width='120px'
-          onClick={handleCloseMenu}
           className='hover:cursor-pointer'
-          onClickCapture={() => navigate('/')}
+          onClick={() => navigate('/')}
         />
       </div>
       <div className='flex-none absolute right-10'>

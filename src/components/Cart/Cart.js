@@ -8,7 +8,8 @@ import OrderSummary from './OrderSummary';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
- 
+  const cartIsOpen = useSelector((state) => state.cart.showCart);
+  console.log(cartIsOpen)
   const cartItems = cart.itemsList.map((item) => (
     <CartItem
       item={item}
@@ -54,7 +55,7 @@ const Cart = () => {
 
   return (
     <>
-      {!cart.showCheckout ? (
+      {!cart.showCheckout  ? (
         <div className='container mx-auto my-10 px-4 card shadow-xl w-96 md:w-full'>
           <h2 className='card-title justify-center pt-10'>Meals in my cart</h2>
           <div className='card-body flex flex-col lg:flex-row gap-4'>
