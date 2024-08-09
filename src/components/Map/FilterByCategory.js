@@ -69,42 +69,80 @@ const FilterByCategory = () => {
     }
 
     return (
-        <div className="container mx-auto p-4 mt-10 mb-20">
-            <h1 className="text-2xl font-bold mb-11">Restaurants in {state} - {category}</h1>
-            <div className="flex justify-evenly mb-4">
-                <img src={burger} alt="burger" className='cursor-pointer' onClick={() => handleCategoryClick('burgers')} />
-                <img src={pizza} alt="pizza" className='cursor-pointer' onClick={() => handleCategoryClick('pizza')} />
-                <img src={fried_chicken} alt="fried chicken" className='cursor-pointer' onClick={() => handleCategoryClick('fried_chicken')} />
-                <img src={steak} alt="steak" className='cursor-pointer' onClick={() => handleCategoryClick('steak')} />
-                <img src={desserts} alt="desserts" className='cursor-pointer' onClick={() => handleCategoryClick('desserts')} />
-            </div>
-            <div className="flex justify-evenly mb-24">
-                <p>BURGER</p>
-                <p>PIZZA</p>
-                <p>FRIED CHICKEN</p>
-                <p>STEAK</p>
-                <p>DESSERT</p>
-            </div>
-                {restaurants.length === 0 ? (
-                    <p>No results found</p>
-                ): (
-                <div className="m-8 mx-48">
-                <MapContainer bounds={bounds} zoom={8} className="h-96">
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                  {restaurants.map(restaurant => (
-                    <Marker key={restaurant.id} position={[restaurant.latitude, restaurant.longitude]} icon={customIcon}>
-                        <Popup>{restaurant.name}</Popup>
-                    </Marker>
-                ))}
-                  <FitBoundsComponent />
-                </MapContainer>
-                </div>
-        )}
+      <div className='container mx-auto p-4 mt-10 mb-20'>
+        <h1 className='text-2xl font-bold mb-11'>
+          Restaurants in {state} - {category}
+        </h1>
+        <div className='flex justify-evenly mb-4'>
+          <img
+            src={burger}
+            alt='burger'
+            className='cursor-pointer'
+            onClick={() => handleCategoryClick('burgers')}
+          />
+          <img
+            src={pizza}
+            alt='pizza'
+            className='cursor-pointer'
+            onClick={() => handleCategoryClick('pizza')}
+          />
+          <img
+            src={fried_chicken}
+            alt='fried chicken'
+            className='cursor-pointer'
+            onClick={() => handleCategoryClick('fried_chicken')}
+          />
+          <img
+            src={steak}
+            alt='steak'
+            className='cursor-pointer'
+            onClick={() => handleCategoryClick('steak')}
+          />
+          <img
+            src={desserts}
+            alt='desserts'
+            className='cursor-pointer'
+            onClick={() => handleCategoryClick('desserts')}
+          />
         </div>
-    )
+        <div className='flex justify-evenly mb-24'>
+          <p>BURGER</p>
+          <p>PIZZA</p>
+          <p>FRIED CHICKEN</p>
+          <p>STEAK</p>
+          <p>DESSERT</p>
+        </div>
+        {restaurants.length === 0 ? (
+          <p>No results found</p>
+        ) : (
+          <div className='m-8 mx-48'>
+            <MapContainer
+              bounds={bounds}
+              zoom={8}
+              className='h-96'>
+              <TileLayer
+                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                attribution='&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              />
+              {restaurants.map((restaurant) => (
+                <Marker
+                  key={restaurant.id}
+                  position={[restaurant.latitude, restaurant.longitude]}
+                  icon={customIcon}
+                  eventHandlers={{
+                    click: () => {
+                      navigate(`/restaurants/menu/${restaurant.name}`);
+                    },
+                  }}>
+                  <Popup>{restaurant.name}</Popup>
+                </Marker>
+              ))}
+              <FitBoundsComponent />
+            </MapContainer>
+          </div>
+        )}
+      </div>
+    );
 }
 
 export default FilterByCategory

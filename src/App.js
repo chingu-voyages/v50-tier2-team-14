@@ -10,41 +10,48 @@ import Hero from './components/UI/Hero';
 import { useState } from 'react';
 
 function App() {
-  const cartIsOpen = useSelector((state) => state.cart.showCart);
+   const cartIsOpen = useSelector((state) => state.cart.showCart);
   const [heroIsOpen, setHeroIsOpen] = useState(true);
 
   const Layout = () => {
     return (
       <>
         <Navbar />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path='/'
-              element={<FilterState />}
-            />
-            <Route
-              path='/restaurants/:state'
-              element={<RestaurantsByState />}
-            />
-            <Route
-              path='/category-map/:state/:category'
-              element={<FilterByCategory />}
-            />
-          </Routes>
-        </BrowserRouter>
-        {cartIsOpen ? <Cart /> : <Menu />}
+        <Routes>
+          <Route
+            path='/'
+            element={<FilterState />}
+          />
+          <Route
+            path='/restaurants/:state'
+            element={<RestaurantsByState />}
+          />
+          <Route
+            path='/category-map/:state/:category'
+            element={<FilterByCategory />}
+          />
+          <Route
+            path='/restaurants/menu/:name'
+            element={<Menu />}
+          />
+          <Route
+            path='/cart'
+            element={<Cart />}
+          />
+        </Routes>
+        {cartIsOpen && <Cart />} {/* Conditional rendering for Cart */}
       </>
     );
   };
+
   return (
-    <>
+    <BrowserRouter>
       {heroIsOpen ? (
         <Hero handleHeroButtonClick={() => setHeroIsOpen(false)} />
       ) : (
         <Layout />
       )}
-    </>
+    </BrowserRouter>
   );
 }
 

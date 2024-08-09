@@ -58,8 +58,8 @@ const OrderSummary = () => {
             return (
               <button
                 className={`btn ${
-                  tipAmount === tip ? 'btn-primary' : 'btn-secondary'
-                }`}
+                  tipAmount === tip ? ' text-black' : 'text-white'
+                } ${tipAmount === tip ? 'btn-primary' : 'btn-secondary'}`}
                 key={tip}
                 onClick={() => handleTipSelection(tip)}>
                 {tip === 0 ? 'No Tip' : `${tip}%`}
