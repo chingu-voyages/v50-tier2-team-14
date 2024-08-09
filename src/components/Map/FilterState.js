@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { stateFullName } from '../../utils/stateFullName.js'
+import curve from '../../images/background/bg.png'
+import rabit_logo from "../../images/logo/hungry_image.png"
 
 const FilterState = () => {
   const [restaurants, setRestaurants] = useState([])
@@ -59,28 +61,39 @@ const handleSearch = () => {
 
 return (
   <>
-    <div className="ml-20 my-20">
-      <h1 className="text-2xl font-bold mb-4">Food Delivery</h1>
+  <div className="h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(${curve})`}}>
+    <div className="flex flex-row">
+      <div className="basis-1/2 h-screen flex justify-center items-center">
+        <img src={rabit_logo} className="size-fit" />
       </div>
-      <div className="flex justify-center align-middle mb-40">
-      <select
-        className="select select-bordered w-full max-w-xs"
-        value={selectedState}
-        onChange={e => setSelectedState(e.target.value)}
-      >
-        <option value="" disabled>Select a State</option>
-        {states.map(state => (
+      <div className="basic-1/2 m-10 p-10 flex flex-col gap-3 justify-center items-center">
+        <div><p className="text-primary text-3xl">HUNGRY RABBIT</p></div>
+        <div>
+          <p className="text-primary text-center text-lg">Offering a diverse menu that includes a</p>
+          <p className="text-primary text-center text-lg">variety of cuisines such as pizza, burgers,</p> 
+          <p className="text-primary text-center text-lg">BBQ, and delicious desserts.</p>
+        </div>
+        <div>
+          <select
+             className="select select-bordered border-primary bg-white w-full max-w-xs"
+             value={selectedState}
+             onChange={e => setSelectedState(e.target.value)}
+          >
+          <option value="" disabled>Select a State</option>
+          {states.map(state => (
           <option key={state.abbreviation} value={state.abbreviation}>{state.fullName}</option>
-        ))}
-      </select>
-      <button
-        className="btn btn-active btn-ghost mx-4"
-        onClick={handleSearch}
-      >
-        Search
-      </button>
+           ))}
+          </select>
+          <button
+            className="btn btn-active btn-ghost mx-4"
+            onClick={handleSearch}
+          >
+          Search
+          </button>
+        </div>
       </div>
-    
+    </div>
+  </div>
     </>
   )
 }
