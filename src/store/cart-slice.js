@@ -7,10 +7,12 @@ const cartSlice = createSlice({
     totalQuantity: 0,
     showCart: false,
     showCheckout: false,
+    changed: false,
   },
   reducers: {
     //adds as many items as user selected
     addToCart(state, action) {
+      state.changed = true;
       const newItem = action.payload;
       const existingItem = state.itemsList.find(
         (item) => item.id === newItem.id
@@ -32,6 +34,7 @@ const cartSlice = createSlice({
     },
     //removes 1 item from cart
     removeFromCart(state, action) {
+      state.changed = true;
       const idToRemove = action.payload;
       const existingItem = state.itemsList.find(
         (item) => item.id === idToRemove
@@ -49,12 +52,14 @@ const cartSlice = createSlice({
     },
     //removes all items of the same kind from cart
     removeAllItemsFromCart(state, action) {
+      state.changed = true;
       const idToRemove = action.payload;
       const existingItem = state.itemsList.find(item => item.id === idToRemove);
       state.itemsList = state.itemsList.filter(item => item.id !== idToRemove);
       state.totalQuantity -= existingItem.quantity;
     },
     resetCart(state) {
+      state.changed = true;
       state.itemsList = [];
       state.totalQuantity = 0;
     },
@@ -67,12 +72,11 @@ const cartSlice = createSlice({
     },
     //replaces cart data with data from localStorage
     replaceCart(state, action) {
-      const { itemsList, totalQuantity, showCart, showCheckout } =
+      console.log(action)
+      const { itemsList = [], totalQuantity = 0 } =
         action.payload;
       state.itemsList = itemsList;
       state.totalQuantity = totalQuantity;
-      state.showCart = showCart;
-      state.showCheckout = showCheckout;
     }
   },
 });
