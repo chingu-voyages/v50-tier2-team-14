@@ -8,10 +8,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useSelector } from "react-redux"
 import Hero from "./components/UI/Hero";
 import { useState } from "react";
+import Home from "./components/Home/Home";
+import Footer from "./components/UI/Footer";
 
 function App() {
-  const cartIsOpen = useSelector(state => state.cart.showCart);
+  const cartIsOpen = useSelector((state) => state.cart.showCart);
   const [heroIsOpen, setHeroIsOpen] = useState(true);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const Layout = () => {
     return (
@@ -25,9 +28,28 @@ function App() {
     </Routes>
     </BrowserRouter>
         {cartIsOpen ? <Cart /> : <Menu />}
+
+//   THese are changes from development branch with homepage UI. we need to update this page so everything displays correctly with react router
+//         <Navbar handleCloseMenu={() => setMenuIsOpen(!menuIsOpen)} />
+//         {/* {cartIsOpen ? (
+//           <Cart />
+//         ) : (
+//           <Home handleHeroButtonClick={() => setMenuIsOpen(!menuIsOpen)} />
+//         )} */}
+//         {cartIsOpen ? (
+//           <Cart />
+//         ) : menuIsOpen ? (
+//           <Menu />
+//         ) : (
+//           <Home handleHeroButtonClick={() => setMenuIsOpen(!menuIsOpen)} />
+//         )}
+//         {/* {menuIsOpen ? <Menu /> : <Home />} */}
+//         {/* {cartIsOpen ? <Cart /> : <Menu />} */}
+//         <Footer />
+
       </>
     );
-}
+  };
   return (
     <>
       {heroIsOpen ? (
