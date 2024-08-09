@@ -3,7 +3,7 @@ import React from "react";
 const Testimonials = () => {
   return (
     <section className="hero bg-white min-h-screen flex flex-col justify-center items-center py-8">
-      <h1 className="text-4xl font-bold uppercase text-primary">
+      <h1 className="text-2xl md:text-5xl font-bold uppercase text-primary">
         testimonials
       </h1>
       <div className="hero-content flex-col lg:flex-row gap-6">
