@@ -1,29 +1,30 @@
-import React from 'react';
+import React from "react";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { cartActions } from '../../store/cart-slice';
+import {  useSelector } from "react-redux";
 
-import logo from '../../images/logo/rabbit_logo_1.png';
-
+import logo from "../../images/logo/rabbit_logo_1.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cartNotEmpty = cart.totalQuantity > 0;
-  
-   const viewCart = () => {
-     dispatch(cartActions.setShowCart());
-   };
- 
+
+  const viewCart = () => {
+    navigate('/cart');
+  };
+
   return (
-    <div className='navbar bg-neutral relative'>
+    <div className='navbar bg-white relative'>
       <div className='flex-1'>
         <img
           src={logo}
           alt='Logo'
           width='120px'
+          className='hover:cursor-pointer'
+          onClick={() => navigate('/')}
         />
       </div>
       <div className='flex-none absolute right-10'>

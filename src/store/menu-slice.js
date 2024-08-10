@@ -10,7 +10,7 @@ const initialState = {
 
 export const fetchMenuData = createAsyncThunk(
   'menu/fetchMenuData',
-  async ({ lat, long }) => {
+  async ({ name }) => {
     const response = await fetch('https://menus-api.vercel.app/');
     const result = await response.json();
     //get our-foods array which includes all the dishes combined from the API
@@ -18,7 +18,7 @@ export const fetchMenuData = createAsyncThunk(
     //find dishes belonging to only target restaurant
     let targetRestaurantMenu = allRestaurantsArray.filter(
       (restaurant) =>
-        restaurant.latitude === lat && restaurant.longitude === long
+        restaurant.name === name
     );
     //remove duplicates from targetRestaurantMenu
     const uniqueItems = Array.from(
