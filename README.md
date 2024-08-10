@@ -34,6 +34,14 @@ searching!
 
 ### Screenshots 
 
+Main Page:
+
+![](./public/screenshots/MainPage.png)
+
+Map Page:
+
+![](./public/screenshots/Map.png)
+
 Menu page:
 
 ![](./public/screenshots/Menu.png)
@@ -49,7 +57,7 @@ Checkout page:
 
 ### Links
 
-
+- Case study: [Case study](https://boatneck-brie-0a1.notion.site/Hungry-Bunny-221b2d2f3ddb4481b0807af823508bbf)
 - Solution URL: [Github](https://github.com/chingu-voyages/v50-tier2-team-14)
 - Live Site URL: [Hungry rabbit](https://hungry-rabbit.onrender.com/)
 
