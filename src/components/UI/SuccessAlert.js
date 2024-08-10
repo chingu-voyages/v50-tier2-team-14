@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Alert = () => {
+const SuccessAlert = () => {
   return (
     <div
       role='alert'
@@ -22,4 +22,4 @@ const Alert = () => {
   );
 }
 
-export default Alert
+export default SuccessAlert

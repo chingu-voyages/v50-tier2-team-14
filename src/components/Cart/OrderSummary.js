@@ -1,28 +1,34 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart-slice';
 import { useEffect, useState } from 'react';
-import Alert from '../UI/Alert';
+import SuccessAlert from '../UI/SuccessAlert';
+import ErrorAlert from '../UI/ErrorAlert';
 
 //TODO: redirect to homepage after order has been placed
 
 const OrderSummary = () => {
   const [tipAmount, setTipAmount] = useState('');
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [orderError, setOrderError] = useState(false);
+  const [notEnoughCredits, setNotEnoughCredits] = useState(false);
+  const [cartEmpty, setCartEmpty] = useState(false);
 
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
-  //display green alert for 6 seconds on orderplaced button click
+  //display green or red alert for 5 seconds on orderplaced button click
   useEffect(() => {
-    if (orderPlaced) {
+    if (orderPlaced || orderError) {
       const timer = setTimeout(() => {
-        setOrderPlaced(false);
-      }, 6000);
-      //cleanup timeout
+          setOrderPlaced(false);      
+        setOrderError(false);
+        setNotEnoughCredits(false);
+        
+      }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [orderPlaced]);
+  }, [orderPlaced, orderError]);
 
   const cartTotalPrice = cart.itemsList.reduce((accumulator, item) => {
     return accumulator + item.totalPrice;
@@ -32,6 +38,23 @@ const OrderSummary = () => {
     ? cartTotalPrice + (cartTotalPrice * parseInt(tipAmount)) / 100 || 0
     : cartTotalPrice;
 
+  //parse data from localstorage, ensure that the number is > 0
+  let savedCredits = 0;
+  try {
+    savedCredits = JSON.parse(localStorage.getItem('credits'));
+    if (savedCredits < 0) {
+      savedCredits = 0;
+    }
+  } catch (error) {
+    savedCredits = 0
+  };
+  
+
+   useEffect(() => {
+     setNotEnoughCredits(savedCredits < cartTotalPriceWithTip);
+     setCartEmpty(cart.totalQuantity === 0);
+   }, [cart.totalQuantity, cartTotalPriceWithTip, savedCredits]);
+  
   const handleCheckoutClick = () => {
     dispatch(cartActions.setShowCheckout());
   };
@@ -40,11 +63,33 @@ const OrderSummary = () => {
     setTipAmount(amount);
   };
 
+ 
+  //update local storage when order is placed and dispatch custom event  
+  const updateLocalStorage = (newCredits) => {
+    const creditsToSave = Math.max(0, parseFloat(newCredits));
+    localStorage.setItem('credits', JSON.stringify(creditsToSave.toFixed(2)));
+    window.dispatchEvent(new Event('localStorageUpdated'))
+  }
+
+
   const handlePlaceOrder = () => {
-    //display green alert
-    setOrderPlaced(true);
-    //reset the cart
-    dispatch(cartActions.resetCart());
+   
+    setOrderError(false);
+    // Check if there are enough credits and if the cart is not empty
+    if (notEnoughCredits || cartEmpty) {
+      //display red alert
+      setOrderPlaced(false);
+      setOrderError(true);
+    } else {
+      //display green alert
+      setOrderPlaced(true);
+      //reset the cart
+      dispatch(cartActions.resetCart());
+      //calculate thew new credits
+      const newCredits = parseFloat(savedCredits) - parseFloat(cartTotalPriceWithTip);
+      //update localstorage
+      updateLocalStorage(Math.max(0, newCredits));
+    }
   };
 
   //TO DO: add custom tip input
@@ -58,8 +103,8 @@ const OrderSummary = () => {
             return (
               <button
                 className={`btn ${
-                  tipAmount === tip ? 'btn-primary' : 'btn-secondary'
-                }`}
+                  tipAmount === tip ? ' text-black' : 'text-white'
+                } ${tipAmount === tip ? 'btn-primary' : 'btn-secondary'}`}
                 key={tip}
                 onClick={() => handleTipSelection(tip)}>
                 {tip === 0 ? 'No Tip' : `${tip}%`}
@@ -122,7 +167,16 @@ const OrderSummary = () => {
         <>
           <TipSuggestions />
           <OrderTotal />
-          {orderPlaced && <Alert />}
+          {orderPlaced && <SuccessAlert />}
+          {orderError && (
+            <ErrorAlert
+              message={
+                notEnoughCredits
+                  ? 'Not enough credits.'
+                  : 'Your cart is empty. Add items to your cart to place order!'
+              }
+            />
+          )}
         </>
       )}
     </div>
