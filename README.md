@@ -64,8 +64,8 @@ Checkout page:
 - Redux
 - DaisyUI
 - Tailwind CSS
-- [Menus API] (https://menus-api.vercel.app/)
-- [Leaflet.js] (https://react-leaflet.js.org/)
+- [Menus API](https://menus-api.vercel.app/)
+- [Leaflet.js](https://react-leaflet.js.org/)
 
 
 ### What we learned
