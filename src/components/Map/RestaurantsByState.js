@@ -126,40 +126,45 @@ const RestaurantsByState = () => {
         <img
           src={pizza}
           alt='pizza'
-          className='size-40 cursor-pointer'
+          className='size-32 cursor-pointer'
           onClick={() => handleCategoryClick('pizza')}
         />
         <img
           src={fried_chicken}
           alt='fried chicken'
-          className='size-40 cursor-pointer'
+          className='size-32 cursor-pointer'
           onClick={() => handleCategoryClick('fried_chicken')}
         />
         <img
           src={steak}
           alt='steak'
-          className='size-40 cursor-pointer'
+          className='size-32 cursor-pointer'
           onClick={() => handleCategoryClick('steak')}
         />
         <img
           src={desserts}
           alt='desserts'
-          className='size-40 cursor-pointer'
+          className='size-32 cursor-pointer'
           onClick={() => handleCategoryClick('desserts')}
         />
       </div>
       <div className='flex justify-evenly mb-24'>
-        <p>BURGER</p>
-        <p>PIZZA</p>
-        <p>FRIED CHICKEN</p>
-        <p>STEAK</p>
-        <p>DESSERT</p>
+        <p className='font-extrabold'>BURGER</p>
+        <p className='font-extrabold'>PIZZA</p>
+        <p className='font-extrabold'>FRIED CHICKEN</p>
+        <p className='font-extrabold'>STEAK</p>
+        <p className='font-extrabold'>DESSERT</p>
       </div>
+      {restaurants.length === 0 ? (
+            <div className='border border-secondary rounded-xl bg-neutral h-40 flex justify-center items-center'>
+          <p className='font-tensor text-primary font-extrabold'>No results found</p>
+          </div>
+        ) : (
       <div className='m-8 mx-48'>
         <MapContainer
           bounds={bounds}
           zoom={1}
-          className='h-96'>
+          className='h-96 rounded-xl shadow-lg'>
           <TileLayer
             url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             attribution='&copy <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -180,6 +185,7 @@ const RestaurantsByState = () => {
           <FitBoundsComponent />
         </MapContainer>
       </div>
+        )}
     </div>
   )
 }

@@ -9,6 +9,10 @@ import RestaurantsByState from './components/Map/RestaurantsByState';
 import FilterState from './components/Map/FilterState';
 import FilterByCategory from './components/Map/FilterByCategory';
 import Cart from './components/Cart/Cart';
+import About from './components/UI/About';
+import HowTo from './components/UI/HowTo';
+import Testimonials from './components/UI/Testimonials';
+import Footer from './components/UI/Footer';
 
 import { cartActions } from './store/cart-slice';
 
@@ -76,6 +80,10 @@ function App() {
           />
         </Routes>
         {cartIsOpen && <Cart />} {/* Conditional rendering for Cart */}
+        <About />
+        <HowTo />
+        <Testimonials />
+        <Footer />
       </>
     );
   };
