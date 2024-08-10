@@ -12,18 +12,16 @@ const About = () => {
           className="w-full max-w-[10rem] md:max-w-[15rem]"
         />
         <div className="text-center md:text-left">
-          <h1 className="text-2xl md:text-5xl font-bold uppercase text-primary">
-            about us
-          </h1>
+            <p className='font-luckiestGuy text-2xl md:text-5xl text-primary'>about us</p>
           <div className="space-y-6 py-6">
-            <p className=" w-full max-w-lg font-light text-lg">
+            <p className=" w-full max-w-lg font-light text-lg font-tensor">
               Hungry Rabbit is a food search app that offers a variety of meals
               to choose from in your location. We are located across various
               cities in the United States. We take pride in ensuring that our
               customers enjoy the freshest meals. Even when they are delivered
               to your front door.
             </p>
-            <p className=" w-full max-w-lg font-light text-lg">
+            <p className=" w-full max-w-lg font-light text-lg font-tensor">
               We're a team of developers and UI/UX designer from all over the
               world who love two things: eating and coding. We've worked
               tirelessly to bring this app to life, and we hope you enjoy using
