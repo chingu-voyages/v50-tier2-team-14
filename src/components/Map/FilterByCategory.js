@@ -11,6 +11,7 @@ import desserts from "../../images/category/desserts.png"
 import { Icon } from "leaflet"
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
+import { stateFullName } from '../../utils/stateFullName'
 
 const FilterByCategory = () => {
     const { state, category } = useParams()
@@ -27,12 +28,18 @@ const FilterByCategory = () => {
             try {
                 const response = await axios.get('https://menus-api.vercel.app/')
                 const data = response.data
-                const filteredRestaurants = data[category].filter(restaurant => 
+                // make sure the restaurants belong to the categories we picked
+                if (data[category] && Array.isArray(data[category])) {
+                    const filteredRestaurants = data[category].filter(restaurant => 
                     restaurant.country.split(', ').pop() === state
                 )
                 setRestaurants(filteredRestaurants)
                 if (filteredRestaurants.length === 0) {
-                    alert("No result found")
+                    alert("No result found for this category")
+                }
+            } else {
+                    console.log("No result found for this category")
+                    setRestaurants([])
                 }
             } catch (error) {
                 console.error("Error fetching the menu data", error)
@@ -67,11 +74,13 @@ const FilterByCategory = () => {
         }, [map, bounds, restaurants.length])
         return null
     }
+    // convert state abbreviation to full name
+    const stateName = stateFullName[state]
 
     return (
       <div className='container mx-auto p-4 mt-10 mb-20'>
         <h1 className='text-2xl font-bold mb-11'>
-          Restaurants in {state} - {category}
+          Restaurants in {stateName} - {category}
         </h1>
         <div className='flex justify-evenly mb-4'>
           <img

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import {
   MapContainer,
   TileLayer,
@@ -7,77 +7,78 @@ import {
   Popup,
   useMap,
   useMapEvent,
-} from 'react-leaflet';
-import redMarker from '../../images/marker/red_marker.png';
-import burger from '../../images/category/burger.png';
-import pizza from '../../images/category/pizza.png';
-import fried_chicken from '../../images/category/fried_chicken.png';
-import steak from '../../images/category/steak.png';
-import desserts from '../../images/category/desserts.png';
-import { Icon } from 'leaflet';
-import axios from 'axios';
-import 'leaflet/dist/leaflet.css';
+} from 'react-leaflet'
+import redMarker from '../../images/marker/red_marker.png'
+import burger from '../../images/category/burger.png'
+import pizza from '../../images/category/pizza.png'
+import fried_chicken from '../../images/category/fried_chicken.png'
+import steak from '../../images/category/steak.png'
+import desserts from '../../images/category/desserts.png'
+import { Icon } from 'leaflet'
+import axios from 'axios'
+import 'leaflet/dist/leaflet.css'
+import { stateFullName } from '../../utils/stateFullName'
 
 const RestaurantsByState = () => {
-  const { state } = useParams();
-  const [restaurants, setRestaurants] = useState([]);
-  const navigate = useNavigate();
+  const { state } = useParams()
+  const [restaurants, setRestaurants] = useState([])
+  const navigate = useNavigate()
 
   const customIcon = new Icon({
     iconUrl: redMarker,
     iconSize: [40, 40],
-  });
+  })
 
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
-        const response = await axios.get('https://menus-api.vercel.app/');
-        const data = response.data;
-        const allRestaurantData = Object.values(data);
+        const response = await axios.get('https://menus-api.vercel.app/')
+        const data = response.data
+        const allRestaurantData = Object.values(data)
 
         // Normalize all data is Array
         const normalized = allRestaurantData.map((item) =>
           Array.isArray(item) ? item : [item]
-        );
+        )
 
         // push data we needed to use in allRestaurants Array
-        const allRestaurants = [];
+        const allRestaurants = []
         normalized.forEach((category) => {
           category.forEach((restaurant) => {
             if (restaurant.country) {
-              const restaurantState = restaurant.country.split(', ').pop();
-              const id = Math.random();
-              const name = restaurant.name;
-              const latitude = restaurant.latitude;
-              const longitude = restaurant.longitude;
-              const image = restaurant.img;
+              const restaurantState = restaurant.country.split(', ').pop()
+              const id = Math.random()
+              const name = restaurant.name
+              const latitude = restaurant.latitude
+              const longitude = restaurant.longitude
+              const image = restaurant.img
               allRestaurants.push({
                 id,
                 name,
                 latitude,
                 longitude,
                 state: restaurantState,
-              });
+              })
             }
-          });
-        });
+          })
+        })
 
         // get restaurants that located in a specific state
         const filteredRestaurants = allRestaurants.filter(
           (r) => r.state === state
-        );
-        setRestaurants(filteredRestaurants);
+        )
+        setRestaurants(filteredRestaurants)
       } catch (error) {
-        console.error('Error fetching the menu data', error);
+        console.error('Error fetching the menu data', error)
       }
-    };
+    }
 
-    fetchMenuData();
-  }, [state]);
+    fetchMenuData()
+  }, [state])
 
   const handleCategoryClick = (category) => {
-    navigate(`/category-map/${state}/${category}`);
-  };
+    navigate(`/category-map/${state}/${category}`)
+  }
 
   // Set boundary between all restaurants, center groups of markers
   const calculateBounds = (restaurants) => {
@@ -85,34 +86,36 @@ const RestaurantsByState = () => {
       return [
         [0, 0],
         [0, 0],
-      ];
-    const latitudes = restaurants.map((r) => r.latitude);
-    const longitudes = restaurants.map((r) => r.longitude);
-    const minLat = Math.min(...latitudes);
-    const maxLat = Math.max(...latitudes);
-    const minLng = Math.min(...longitudes);
-    const maxLng = Math.max(...longitudes);
+      ]
+    const latitudes = restaurants.map((r) => r.latitude)
+    const longitudes = restaurants.map((r) => r.longitude)
+    const minLat = Math.min(...latitudes)
+    const maxLat = Math.max(...latitudes)
+    const minLng = Math.min(...longitudes)
+    const maxLng = Math.max(...longitudes)
     return [
       [minLat, minLng],
       [maxLat, maxLng],
-    ];
-  };
+    ]
+  }
 
-  const bounds = calculateBounds(restaurants);
+  const bounds = calculateBounds(restaurants)
 
   const FitBoundsComponent = () => {
-    const map = useMap();
+    const map = useMap()
     useEffect(() => {
       if (restaurants.length > 0) {
-        map.fitBounds(bounds);
+        map.fitBounds(bounds)
       }
-    }, [map, bounds, restaurants.length]);
-    return null;
-  };
+    }, [map, bounds, restaurants.length])
+    return null
+  }
+
+  const stateName = stateFullName[state]
 
   return (
     <div className='container mx-auto p-4  mt-10 mb-20'>
-      <h1 className='text-2xl font-bold mb-11'>Restaurants in {state}</h1>
+      <h1 className='text-2xl font-bold mb-11'>Restaurants in {stateName}</h1>
       <div className='flex justify-evenly'>
         <img
           src={burger}
@@ -168,7 +171,7 @@ const RestaurantsByState = () => {
               icon={customIcon}
               eventHandlers={{
                 click: () => {
-                  navigate(`/restaurants/menu/${restaurant.name}`);
+                  navigate(`/restaurants/menu/${restaurant.name}`)
                 },
               }}>
               <Popup>{restaurant.name}</Popup>
@@ -178,7 +181,7 @@ const RestaurantsByState = () => {
         </MapContainer>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RestaurantsByState;
+export default RestaurantsByState

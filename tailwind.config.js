@@ -2,6 +2,13 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: { 
+    extend: {
+      fontFamily:{
+        luckiestGuy: ['Luckiest Guy', 'cursive'],
+        amaranth: ['Amaranth', 'sans-serif'],
+        tensor: ['Tenor Sans', 'sans-serif']
+      },
+    },
   },
   plugins: [require('daisyui')],
   // daisyUI config (optional - here are the default values)
