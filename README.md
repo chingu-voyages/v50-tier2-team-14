@@ -1,9 +1,11 @@
 # HUNGRY RABBIT
 
 
-Hungry Rabbit is a food search app that offers a variety of meals to choose from in your location.
+<!--Hungry Rabbit is a food search app that offers a variety of meals to choose from in your location.-->
 
-
+Hungry Bunny is a newly established food delivery service in the market. Our goal,
+is to attract potential customers to utilize our company's web application food delivery
+services to the customer’s location.
 
 
 # About us
