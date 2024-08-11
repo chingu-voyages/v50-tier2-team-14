@@ -27,6 +27,7 @@ searching!
  - [Useful resources](#useful-resources)
 - [Our Team](#our-team)
 - [Acknowledgments](#acknowledgments)
+- [Case study](#case-study)
 
 
 ## Overview
