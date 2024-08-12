@@ -22,9 +22,7 @@ searching!
  - [Links](#links)
 - [Our process](#my-process)
  - [Built with](#built-with)
- - [What We learned](#what-i-learned)
- - [Continued development](#continued-development)
- - [Useful resources](#useful-resources)
+ - [What We learned](#what-we-learned)
 - [Our Team](#our-team)
 - [Acknowledgments](#acknowledgments)
 
