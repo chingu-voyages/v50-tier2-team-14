@@ -1,19 +1,29 @@
 import React from "react";
 
-import {  useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 
 import logo from "../../images/logo/rabbit_logo_1.png";
 import { useNavigate } from "react-router-dom";
 
+import { cartActions } from '../../store/cart-slice';
+
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
 
+  console.log(cart.showCart)
   const navigate = useNavigate();
 
+
+  const dispatch = useDispatch();
   const cartNotEmpty = cart.totalQuantity > 0;
 
   const viewCart = () => {
-    navigate('/cart');
+    dispatch(cartActions.setShowCart());
+    if (!cart.showCart) {
+      navigate('/cart')
+    } else {
+      navigate('/')
+    }
   };
 
   return (

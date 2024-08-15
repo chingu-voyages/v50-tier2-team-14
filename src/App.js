@@ -79,7 +79,6 @@ function App() {
             element={<Cart />}
           />
         </Routes>
-        {cartIsOpen && <Cart />} {/* Conditional rendering for Cart */}
         <About />
         <HowTo />
         <Testimonials />
