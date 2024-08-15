@@ -15,6 +15,7 @@ import Testimonials from './components/UI/Testimonials';
 import Footer from './components/UI/Footer';
 
 import { cartActions } from './store/cart-slice';
+import Home from './components/Home/Home';
 
 let isFirstRender = true;
 
@@ -60,7 +61,7 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<FilterState />}
+            element={<Home />}
           />
           <Route
             path='/restaurants/:state'
@@ -79,11 +80,6 @@ function App() {
             element={<Cart />}
           />
         </Routes>
-        {cartIsOpen && <Cart />} {/* Conditional rendering for Cart */}
-        <About />
-        <HowTo />
-        <Testimonials />
-        <Footer />
       </>
     );
   };
