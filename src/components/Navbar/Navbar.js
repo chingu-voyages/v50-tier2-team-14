@@ -10,7 +10,6 @@ import { cartActions } from '../../store/cart-slice';
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
 
-  console.log(cart.showCart)
   const navigate = useNavigate();
 
 
