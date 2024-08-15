@@ -16,7 +16,7 @@ const OrderSummary = () => {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-
+  
   //display green or red alert for 5 seconds on orderplaced button click
   useEffect(() => {
     if (orderPlaced || orderError) {
@@ -82,7 +82,9 @@ const OrderSummary = () => {
       setOrderError(true);
     } else {
       //display green alert
+      
       setOrderPlaced(true);
+      
       //reset the cart
       dispatch(cartActions.resetCart());
       //calculate thew new credits

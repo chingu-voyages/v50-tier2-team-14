@@ -9,21 +9,28 @@ import { cartActions } from '../../store/cart-slice';
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
-
+console.log(cart.showCart)
   const navigate = useNavigate();
 
 
   const dispatch = useDispatch();
   const cartNotEmpty = cart.totalQuantity > 0;
 
-  const viewCart = () => {
-    dispatch(cartActions.setShowCart());
+  const viewCart = () => { 
     if (!cart.showCart) {
       navigate('/cart')
     } else {
       navigate(-1)
     }
+    dispatch(cartActions.setShowCart());
   };
+
+  const handleBackToHomeClick = () => {
+    if (cart.showCart) {
+       dispatch(cartActions.setShowCart());
+    }
+    navigate('/');
+  }
 
   return (
     <div className='navbar bg-white relative'>
@@ -33,7 +40,7 @@ const Navbar = () => {
           alt='Logo'
           width='120px'
           className='hover:cursor-pointer'
-          onClick={() => navigate('/')}
+          onClick={handleBackToHomeClick}
         />
       </div>
       <div className='flex-none absolute right-10'>
