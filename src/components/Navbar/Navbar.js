@@ -22,7 +22,7 @@ const Navbar = () => {
     if (!cart.showCart) {
       navigate('/cart')
     } else {
-      navigate('/')
+      navigate(-1)
     }
   };
 
